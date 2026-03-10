@@ -280,7 +280,7 @@ export default function StudyRoom() {
         )}
       </div>
 
-      {/* 小桌子 */}
+      {/* 小桌子 - 放置诗词集和投资理财 */}
       <div className="side-table">
         <div className="side-table-top"></div>
         <div className="side-table-rail"></div>
@@ -288,40 +288,35 @@ export default function StudyRoom() {
         <div className="side-table-leg side-table-leg-2"></div>
         <div className="side-table-leg side-table-leg-3"></div>
         
-        {/* 跳马雕像 */}
-        <div className="horse-statue">
-          <div className="statue-base"></div>
-          <div className="horse-body">
-            <svg viewBox="0 0 80 70" className="w-full h-full">
-              {/* 底座 */}
-              <rect x="10" y="58" width="60" height="12" fill="#8B7355" rx="2"/>
-              <rect x="15" y="55" width="50" height="5" fill="#A0826D" rx="1"/>
-              
-              {/* 马身体 */}
-              <ellipse cx="40" cy="38" rx="20" ry="12" fill="#D4A574"/>
-              
-              {/* 马腿 - 前腿抬起 */}
-              <path d="M55,45 L58,55 L54,55 L52,45" fill="#C49A6C"/>
-              <path d="M50,48 L48,55 L44,55 L46,48" fill="#B8956E"/>
-              <path d="M32,45 L30,55 L26,55 L28,45" fill="#C49A6C"/>
-              <path d="M38,45 L36,55 L32,55 L34,45" fill="#B8956E"/>
-              
-              {/* 马头 */}
-              <path d="M58,35 Q68,30 65,20 Q62,15 58,18 Q55,22 55,30 Q56,35 58,35" fill="#D4A574"/>
-              
-              {/* 马耳 */}
-              <path d="M60,18 L62,10 L64,17" fill="#C49A6C"/>
-              
-              {/* 马鬃 */}
-              <path d="M55,25 Q50,22 48,28 Q52,26 55,28" fill="#8B7355"/>
-              <path d="M50,30 Q45,28 43,32 Q47,30 50,32" fill="#8B7355"/>
-              
-              {/* 马尾 */}
-              <path d="M20,35 Q10,40 15,50" stroke="#8B7355" strokeWidth="3" fill="none"/>
-              
-              {/* 眼睛 */}
-              <circle cx="62" cy="24" r="1.5" fill="#2D1F0F"/>
-            </svg>
+        {/* 小桌子上的书 */}
+        <div className="side-table-books">
+          {/* 诗词集 */}
+          <div
+            className={`side-table-book side-table-book-1 ${hoveredBook === '4' ? 'hovered' : ''}`}
+            style={{
+              '--book-color': '#4A3728',
+              '--book-accent': '#E8C89E',
+            } as React.CSSProperties}
+            onMouseEnter={() => setHoveredBook('4')}
+            onMouseLeave={() => setHoveredBook(null)}
+          >
+            <a href="/poetry" className="book-link">
+              <span className="book-title-flat">诗词集</span>
+            </a>
+          </div>
+          {/* 投资理财 */}
+          <div
+            className={`side-table-book side-table-book-2 ${hoveredBook === '5' ? 'hovered' : ''}`}
+            style={{
+              '--book-color': '#6B4423',
+              '--book-accent': '#C49A6C',
+            } as React.CSSProperties}
+            onMouseEnter={() => setHoveredBook('5')}
+            onMouseLeave={() => setHoveredBook(null)}
+          >
+            <a href="/finance" className="book-link">
+              <span className="book-title-flat">投资理财</span>
+            </a>
           </div>
         </div>
       </div>
@@ -330,6 +325,7 @@ export default function StudyRoom() {
       <div className="bookshelf">
         <div className="shelf-back"></div>
         <div className="shelf shelf-1">
+          {/* 人生哲学、创业笔记 */}
           {defaultBooks.slice(0, 2).map((book) => (
             <div
               key={book.id}
@@ -353,7 +349,8 @@ export default function StudyRoom() {
           ))}
         </div>
         <div className="shelf shelf-2">
-          {defaultBooks.slice(2, 5).map((book) => (
+          {/* 技术手册 */}
+          {defaultBooks.slice(2, 3).map((book) => (
             <div
               key={book.id}
               className={`shelf-book ${hoveredBook === book.id ? 'hovered' : ''}`}
@@ -376,7 +373,8 @@ export default function StudyRoom() {
           ))}
         </div>
         <div className="shelf shelf-3">
-          {defaultBooks.slice(4, 6).map((book) => (
+          {/* 健康生活 */}
+          {defaultBooks.slice(5, 6).map((book) => (
             <div
               key={book.id}
               className={`shelf-book ${hoveredBook === book.id ? 'hovered' : ''}`}

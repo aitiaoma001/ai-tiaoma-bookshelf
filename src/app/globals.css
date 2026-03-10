@@ -1164,30 +1164,65 @@
 .side-table-leg-2 { left: 50%; transform: translateX(-50%); }
 .side-table-leg-3 { right: 8px; }
 
-/* 跳马雕像 */
-.horse-statue {
+/* 小桌子上的书 */
+.side-table-books {
   position: absolute;
-  top: -55px;
+  top: -45px;
   left: 50%;
   transform: translateX(-50%);
-  width: 55px;
-  height: 55px;
+  width: 70px;
+  height: 50px;
 }
 
-.statue-base {
+.side-table-book {
   position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 8px;
-  background: linear-gradient(180deg, #654321, #3D2A15);
   border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  background: var(--book-color);
+  box-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    inset -1px 0 4px rgba(0, 0, 0, 0.3),
+    inset 2px 0 4px rgba(255, 255, 255, 0.1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
-.horse-body svg {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+.side-table-book:hover,
+.side-table-book.hovered {
+  transform: translateY(-5px);
+  box-shadow: 
+    4px 8px 16px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(212, 165, 116, 0.4);
+}
+
+.side-table-book-1 {
+  bottom: 0;
+  left: 5px;
+  width: 55px;
+  height: 18px;
+  transform: rotate(-2deg);
+}
+
+.side-table-book-2 {
+  bottom: 17px;
+  left: 8px;
+  width: 50px;
+  height: 16px;
+  transform: rotate(1deg);
+}
+
+.side-table-book .book-title-flat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--gold-light);
+  white-space: nowrap;
+  text-shadow: 
+    0 0 5px rgba(212, 165, 116, 0.5),
+    1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 /* ==================== 书架 ==================== */
@@ -1241,7 +1276,7 @@
     2px 0 4px rgba(0, 0, 0, 0.3),
     inset -2px 0 4px rgba(0, 0, 0, 0.3),
     inset 2px 0 4px rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   transform-origin: bottom center;
 }
@@ -1328,7 +1363,7 @@
     2px 2px 6px rgba(0, 0, 0, 0.4),
     inset -1px 0 4px rgba(0, 0, 0, 0.3),
     inset 2px 0 4px rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
@@ -1395,7 +1430,7 @@
   box-shadow: 
     2px 2px 6px rgba(0, 0, 0, 0.4),
     inset -1px 0 4px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
