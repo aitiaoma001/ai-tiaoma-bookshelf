@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStudy } from '@/store/StudyContext';
 import BookManager from '@/components/admin/BookManager';
 import LayoutManager from '@/components/admin/LayoutManager';
@@ -9,10 +9,103 @@ import Link from 'next/link';
 
 type TabType = 'books' | 'layout' | 'links' | 'brand';
 
+// 管理后台访问密码
+const ADMIN_PASSWORD = 'tiaoma2024';
+const AUTH_KEY = 'admin_authenticated';
+
 export default function AdminPage() {
   const { brandName, setBrandName, brandSubtitle, setBrandSubtitle, resetToDefault } = useStudy();
   const [activeTab, setActiveTab] = useState<TabType>('books');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
+  // 检查认证状态
+  useEffect(() => {
+    const auth = sessionStorage.getItem(AUTH_KEY);
+    if (auth === 'true') {
+      setIsAuthenticated(true);
+    }
+    setIsLoading(false);
+  }, []);
+
+  // 验证密码
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      sessionStorage.setItem(AUTH_KEY, 'true');
+      setIsAuthenticated(true);
+      setError('');
+    } else {
+      setError('密码错误，请重试');
+      setPassword('');
+    }
+  };
+
+  // 退出登录
+  const handleLogout = () => {
+    sessionStorage.removeItem(AUTH_KEY);
+    setIsAuthenticated(false);
+  };
+
+  // 加载中状态
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#1A1208] flex items-center justify-center">
+        <div className="text-[#D4A574] animate-pulse">加载中...</div>
+      </div>
+    );
+  }
+
+  // 未认证 - 显示登录界面
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#1A1208] flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          {/* Logo */}
+          <div className="text-center mb-8">
+            <div className="text-5xl mb-4">♞</div>
+            <h1 className="text-2xl font-bold text-[#D4A574] mb-2">AI 跳马</h1>
+            <p className="text-[#8B7355]">后台管理系统</p>
+          </div>
+
+          {/* 登录表单 */}
+          <form onSubmit={handleLogin} className="bg-[#2D1F0F] rounded-xl p-8 border border-[#3D2A15] shadow-xl">
+            <div className="mb-6">
+              <label className="block text-sm text-[#8B7355] mb-2">访问密码</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="请输入管理密码"
+                className="w-full px-4 py-3 bg-[#1A1208] border border-[#5D4037] rounded-lg text-[#D4A574] focus:outline-none focus:border-[#D4A574] placeholder:text-[#5D4037]"
+                autoFocus
+              />
+              {error && (
+                <p className="text-red-400 text-sm mt-2">{error}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#5D4037] hover:bg-[#6B4423] text-[#D4A574] rounded-lg font-medium transition-colors"
+            >
+              进入后台
+            </button>
+
+            <div className="mt-6 text-center">
+              <Link href="/" className="text-sm text-[#8B7355] hover:text-[#D4A574] transition-colors">
+                ← 返回书房
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  // 已认证 - 显示管理界面
   const tabs: { id: TabType; label: string; icon: string }[] = [
     { id: 'books', label: '书籍管理', icon: '📚' },
     { id: 'layout', label: '布局管理', icon: '🎨' },
@@ -31,16 +124,24 @@ export default function AdminPage() {
             </Link>
             <h1 className="text-xl font-semibold text-[#D4A574]">后台管理</h1>
           </div>
-          <button
-            onClick={() => {
-              if (confirm('确定要重置所有数据吗？此操作不可撤销。')) {
-                resetToDefault();
-              }
-            }}
-            className="px-4 py-2 text-sm text-red-400 border border-red-400/30 rounded-lg hover:bg-red-400/20 transition-colors"
-          >
-            重置数据
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-sm text-[#8B7355] border border-[#5D4037] rounded-lg hover:bg-[#3D2A15] transition-colors"
+            >
+              退出登录
+            </button>
+            <button
+              onClick={() => {
+                if (confirm('确定要重置所有数据吗？此操作不可撤销。')) {
+                  resetToDefault();
+                }
+              }}
+              className="px-4 py-2 text-sm text-red-400 border border-red-400/30 rounded-lg hover:bg-red-400/20 transition-colors"
+            >
+              重置数据
+            </button>
+          </div>
         </div>
       </header>
 
