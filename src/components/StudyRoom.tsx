@@ -47,25 +47,44 @@ export default function StudyRoom() {
         {/* 墙纸纹理 */}
         <div className="wallpaper-texture"></div>
         
-        {/* 墙上的画 */}
-        <div className="painting-frame">
-          <div className="painting">
-            <div className="painting-scene">
-              {/* 一幅山水画 */}
-              <svg viewBox="0 0 200 150" className="w-full h-full">
-                {/* 天空 */}
-                <rect fill="#2D1F0F" width="200" height="150"/>
-                {/* 远山 */}
-                <path d="M0,100 Q50,60 100,80 T200,70 L200,150 L0,150 Z" fill="#4A3520" opacity="0.6"/>
-                <path d="M0,120 Q60,90 120,100 T200,95 L200,150 L0,150 Z" fill="#5D4A35" opacity="0.7"/>
-                {/* 近山 */}
-                <path d="M0,130 Q40,110 80,120 T160,115 L200,130 L200,150 L0,150 Z" fill="#6B5344"/>
-                {/* 月亮 */}
-                <circle cx="160" cy="40" r="15" fill="#D4A574" opacity="0.8"/>
-                {/* 云 */}
-                <ellipse cx="50" cy="50" rx="30" ry="10" fill="#4A3520" opacity="0.4"/>
-              </svg>
+        {/* 墙上的画和下方链接 */}
+        <div className="painting-area">
+          <div className="painting-frame">
+            <div className="painting">
+              <div className="painting-scene">
+                {/* 一幅山水画 */}
+                <svg viewBox="0 0 200 150" className="w-full h-full">
+                  {/* 天空 */}
+                  <rect fill="#2D1F0F" width="200" height="150"/>
+                  {/* 远山 */}
+                  <path d="M0,100 Q50,60 100,80 T200,70 L200,150 L0,150 Z" fill="#4A3520" opacity="0.6"/>
+                  <path d="M0,120 Q60,90 120,100 T200,95 L200,150 L0,150 Z" fill="#5D4A35" opacity="0.7"/>
+                  {/* 近山 */}
+                  <path d="M0,130 Q40,110 80,120 T160,115 L200,130 L200,150 L0,150 Z" fill="#6B5344"/>
+                  {/* 月亮 */}
+                  <circle cx="160" cy="40" r="15" fill="#D4A574" opacity="0.8"/>
+                  {/* 云 */}
+                  <ellipse cx="50" cy="50" rx="30" ry="10" fill="#4A3520" opacity="0.4"/>
+                </svg>
+              </div>
             </div>
+          </div>
+          {/* 画作下方的链接 */}
+          <div className="painting-links">
+            {defaultFireplaceLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`painting-link ${hoveredLink === link.id ? 'hovered' : ''}`}
+                onMouseEnter={() => setHoveredLink(link.id)}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                <span className="link-icon">{link.icon}</span>
+                <span className="link-title">{link.title}</span>
+              </a>
+            ))}
           </div>
         </div>
 
@@ -80,23 +99,6 @@ export default function StudyRoom() {
               <div className="flame flame-1"></div>
               <div className="flame flame-2"></div>
               <div className="flame flame-3"></div>
-            </div>
-            {/* 链接在火焰中 */}
-            <div className="fireplace-links">
-              {defaultFireplaceLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`fireplace-link ${hoveredLink === link.id ? 'hovered' : ''}`}
-                  onMouseEnter={() => setHoveredLink(link.id)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                >
-                  <span className="link-icon">{link.icon}</span>
-                  <span className="link-title">{link.title}</span>
-                </a>
-              ))}
             </div>
           </div>
           {/* 壁炉底座 */}
