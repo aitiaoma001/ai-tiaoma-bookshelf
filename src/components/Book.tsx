@@ -19,43 +19,43 @@ export interface BookProps {
   isDark?: boolean;
 }
 
-// 科技感配色 - 高对比度渐变
+// 鲜艳配色 - 与深色背景形成强对比
 const colorMap: Record<string, { light: string; dark: string }> = {
   red: { 
     light: 'from-rose-400 via-red-500 to-rose-600', 
-    dark: 'from-rose-500 via-red-600 to-rose-700' 
+    dark: 'from-rose-300 via-red-400 to-rose-500' 
   },
   blue: { 
     light: 'from-sky-400 via-blue-500 to-indigo-600', 
-    dark: 'from-cyan-400 via-blue-500 to-indigo-600' 
+    dark: 'from-sky-300 via-blue-400 to-indigo-500' 
   },
   green: { 
     light: 'from-emerald-400 via-green-500 to-teal-600', 
-    dark: 'from-emerald-400 via-green-500 to-teal-600' 
+    dark: 'from-emerald-300 via-green-400 to-teal-500' 
   },
   purple: { 
     light: 'from-fuchsia-400 via-purple-500 to-violet-600', 
-    dark: 'from-violet-400 via-purple-500 to-fuchsia-600' 
+    dark: 'from-fuchsia-300 via-purple-400 to-violet-500' 
   },
   amber: { 
     light: 'from-yellow-400 via-amber-500 to-orange-500', 
-    dark: 'from-amber-400 via-orange-500 to-yellow-500' 
+    dark: 'from-yellow-300 via-amber-400 to-orange-400' 
   },
   pink: { 
     light: 'from-pink-400 via-rose-500 to-pink-600', 
-    dark: 'from-pink-400 via-rose-500 to-pink-600' 
+    dark: 'from-pink-300 via-rose-400 to-pink-500' 
   },
   teal: { 
     light: 'from-cyan-400 via-teal-500 to-emerald-600', 
-    dark: 'from-cyan-400 via-teal-500 to-emerald-600' 
+    dark: 'from-cyan-300 via-teal-400 to-emerald-500' 
   },
   indigo: { 
     light: 'from-violet-400 via-indigo-500 to-blue-600', 
-    dark: 'from-indigo-400 via-violet-500 to-purple-600' 
+    dark: 'from-violet-300 via-indigo-400 to-blue-500' 
   },
   gray: { 
     light: 'from-slate-400 via-gray-500 to-zinc-600', 
-    dark: 'from-slate-400 via-gray-500 to-zinc-600' 
+    dark: 'from-slate-300 via-gray-400 to-zinc-500' 
   },
 };
 
@@ -132,10 +132,10 @@ export default function Book({
           bookColor,
           thicknessMap[thickness],
           heightMap[height],
-          // 立体阴影效果
-          'shadow-[3px_3px_6px_rgba(0,0,0,0.4),6px_6px_12px_rgba(0,0,0,0.3),-1px_-1px_3px_rgba(255,255,255,0.1)]',
-          'hover:shadow-[5px_5px_10px_rgba(0,0,0,0.5),10px_10px_20px_rgba(0,0,0,0.3),-2px_-2px_5px_rgba(255,255,255,0.15)]',
-          importance === 'high' && 'ring-1 ring-white/40',
+          // 立体阴影效果 + 外发光
+          'shadow-[3px_3px_8px_rgba(0,0,0,0.5),6px_6px_16px_rgba(0,0,0,0.4),0_0_20px_rgba(255,255,255,0.1)]',
+          'hover:shadow-[5px_5px_12px_rgba(0,0,0,0.6),10px_10px_24px_rgba(0,0,0,0.4),0_0_30px_rgba(255,255,255,0.15)]',
+          importance === 'high' && 'ring-1 ring-white/50 shadow-[0_0_25px_rgba(255,255,255,0.2)]',
           !isUnlocked && 'opacity-70',
         )}
       >
