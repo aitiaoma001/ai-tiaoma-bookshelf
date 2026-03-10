@@ -4,8 +4,10 @@ import path from 'path';
 const nextConfig: NextConfig = {
   // outputFileTracingRoot: path.resolve(__dirname, '../../'),
   /* config options here */
+  output: 'export',
   allowedDevOrigins: ['*.dev.coze.site'],
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
