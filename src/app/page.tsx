@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Bookshelf from '@/components/Bookshelf';
-import { BookProps } from '@/components/Book';
+import { LinkItem } from '@/components/RotatingBookshelf';
 
 export const metadata: Metadata = {
-  title: '思维书架 - 知识的殿堂',
-  description: '一个展示思维的跃层书架,藏书万卷,思想无限',
+  title: 'AI 跳马 - 思维书架',
+  description: '一个展示思维的跃层书架，藏书万卷，思想无限',
 };
 
 // 示例数据 - 展示不同重要度和私密性的书籍
@@ -80,16 +80,6 @@ const sampleShelves = [
         angle: 'tilted' as const,
         hasBookmark: true,
       },
-      {
-        id: 'book-6',
-        title: '美食探索',
-        link: 'https://example.com/food',
-        color: 'amber' as const,
-        thickness: 'thin' as const,
-        height: 'short' as const,
-        importance: 'low' as const,
-        privacy: 'semi-private' as const,
-      },
     ],
   },
   {
@@ -139,17 +129,6 @@ const sampleShelves = [
         importance: 'medium' as const,
         privacy: 'public' as const,
       },
-      {
-        id: 'book-11',
-        title: 'CSS艺术',
-        link: 'https://example.com/css',
-        color: 'pink' as const,
-        thickness: 'thin' as const,
-        height: 'short' as const,
-        importance: 'low' as const,
-        privacy: 'public' as const,
-        angle: 'stacked' as const,
-      },
     ],
   },
   {
@@ -189,16 +168,6 @@ const sampleShelves = [
         privacy: 'public' as const,
         angle: 'tilted' as const,
       },
-      {
-        id: 'book-15',
-        title: 'AI伦理',
-        link: 'https://example.com/ethics',
-        color: 'gray' as const,
-        thickness: 'thin' as const,
-        height: 'medium' as const,
-        importance: 'medium' as const,
-        privacy: 'public' as const,
-      },
     ],
   },
   {
@@ -236,28 +205,6 @@ const sampleShelves = [
         height: 'medium' as const,
         importance: 'medium' as const,
         privacy: 'public' as const,
-        angle: 'stacked' as const,
-      },
-      {
-        id: 'book-19',
-        title: '数据分析',
-        link: 'https://example.com/analytics',
-        color: 'blue' as const,
-        thickness: 'thin' as const,
-        height: 'short' as const,
-        importance: 'low' as const,
-        privacy: 'public' as const,
-      },
-      {
-        id: 'book-20',
-        title: '创新思维',
-        link: 'https://example.com/innovation',
-        color: 'pink' as const,
-        thickness: 'medium' as const,
-        height: 'medium' as const,
-        importance: 'medium' as const,
-        privacy: 'public' as const,
-        angle: 'tilted' as const,
       },
     ],
   },
@@ -298,20 +245,78 @@ const sampleShelves = [
         privacy: 'public' as const,
         angle: 'stacked' as const,
       },
-      {
-        id: 'book-24',
-        title: '音乐世界',
-        link: 'https://example.com/music',
-        color: 'purple' as const,
-        thickness: 'medium' as const,
-        height: 'medium' as const,
-        importance: 'low' as const,
-        privacy: 'public' as const,
-      },
     ],
   },
 ];
 
+// 常用链接数据
+const sampleLinks: LinkItem[] = [
+  {
+    id: 'link-1',
+    title: 'GitHub',
+    url: 'https://github.com',
+    icon: '🐙',
+    color: 'gray',
+    description: '代码托管平台',
+  },
+  {
+    id: 'link-2',
+    title: 'Google',
+    url: 'https://google.com',
+    icon: '🔍',
+    color: 'blue',
+    description: '搜索引擎',
+  },
+  {
+    id: 'link-3',
+    title: 'ChatGPT',
+    url: 'https://chat.openai.com',
+    icon: '🤖',
+    color: 'green',
+    description: 'AI 对话助手',
+  },
+  {
+    id: 'link-4',
+    title: '掘金',
+    url: 'https://juejin.cn',
+    icon: '💎',
+    color: 'amber',
+    description: '技术社区',
+  },
+  {
+    id: 'link-5',
+    title: '知乎',
+    url: 'https://zhihu.com',
+    icon: '📘',
+    color: 'blue',
+    description: '问答社区',
+  },
+  {
+    id: 'link-6',
+    title: 'Bilibili',
+    url: 'https://bilibili.com',
+    icon: '📺',
+    color: 'pink',
+    description: '视频平台',
+  },
+  {
+    id: 'link-7',
+    title: 'MDN',
+    url: 'https://developer.mozilla.org',
+    icon: '📖',
+    color: 'indigo',
+    description: 'Web 开发文档',
+  },
+  {
+    id: 'link-8',
+    title: 'Vercel',
+    url: 'https://vercel.com',
+    icon: '▲',
+    color: 'gray',
+    description: '部署平台',
+  },
+];
+
 export default function Home() {
-  return <Bookshelf shelves={sampleShelves} />;
+  return <Bookshelf shelves={sampleShelves} links={sampleLinks} />;
 }
