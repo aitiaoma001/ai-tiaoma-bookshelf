@@ -165,7 +165,7 @@ export default function Book({
         <div className="flex-1 flex items-center justify-center p-2 rotate-180" style={{ writingMode: 'vertical-rl' }}>
           <span
             className={cn(
-              'text-xs font-bold text-white transition-all duration-300 drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]',
+              'text-xs font-bold text-stone-800 transition-all duration-300 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]',
               !showTitle && 'blur-sm select-none',
               isPrivate && !isUnlocked && 'blur-md',
               title.length > 10 && 'text-[10px]',
