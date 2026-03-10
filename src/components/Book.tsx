@@ -19,56 +19,56 @@ export interface BookProps {
   isDark?: boolean;
 }
 
-// 鲜艳的配色方案 - 高对比度
+// 科技感配色 - 高对比度渐变
 const colorMap: Record<string, { light: string; dark: string }> = {
   red: { 
     light: 'from-rose-400 via-red-500 to-rose-600', 
     dark: 'from-rose-500 via-red-600 to-rose-700' 
   },
   blue: { 
-    light: 'from-blue-400 via-blue-500 to-indigo-600', 
-    dark: 'from-blue-500 via-blue-600 to-indigo-700' 
+    light: 'from-sky-400 via-blue-500 to-indigo-600', 
+    dark: 'from-cyan-400 via-blue-500 to-indigo-600' 
   },
   green: { 
     light: 'from-emerald-400 via-green-500 to-teal-600', 
-    dark: 'from-emerald-500 via-green-600 to-teal-700' 
+    dark: 'from-emerald-400 via-green-500 to-teal-600' 
   },
   purple: { 
     light: 'from-fuchsia-400 via-purple-500 to-violet-600', 
-    dark: 'from-fuchsia-500 via-purple-600 to-violet-700' 
+    dark: 'from-violet-400 via-purple-500 to-fuchsia-600' 
   },
   amber: { 
-    light: 'from-yellow-400 via-amber-500 to-orange-600', 
-    dark: 'from-yellow-500 via-amber-600 to-orange-700' 
+    light: 'from-yellow-400 via-amber-500 to-orange-500', 
+    dark: 'from-amber-400 via-orange-500 to-yellow-500' 
   },
   pink: { 
     light: 'from-pink-400 via-rose-500 to-pink-600', 
-    dark: 'from-pink-500 via-rose-600 to-pink-700' 
+    dark: 'from-pink-400 via-rose-500 to-pink-600' 
   },
   teal: { 
     light: 'from-cyan-400 via-teal-500 to-emerald-600', 
-    dark: 'from-cyan-500 via-teal-600 to-emerald-700' 
+    dark: 'from-cyan-400 via-teal-500 to-emerald-600' 
   },
   indigo: { 
     light: 'from-violet-400 via-indigo-500 to-blue-600', 
-    dark: 'from-violet-500 via-indigo-600 to-blue-700' 
+    dark: 'from-indigo-400 via-violet-500 to-purple-600' 
   },
   gray: { 
     light: 'from-slate-400 via-gray-500 to-zinc-600', 
-    dark: 'from-slate-500 via-gray-600 to-zinc-700' 
+    dark: 'from-slate-400 via-gray-500 to-zinc-600' 
   },
 };
 
 const thicknessMap = {
-  thin: 'w-14',
-  medium: 'w-18',
-  thick: 'w-24',
+  thin: 'w-12',
+  medium: 'w-16',
+  thick: 'w-20',
 };
 
 const heightMap = {
-  short: 'h-36',
-  medium: 'h-44',
-  tall: 'h-56',
+  short: 'h-32',
+  medium: 'h-40',
+  tall: 'h-52',
 };
 
 export default function Book({
@@ -82,7 +82,7 @@ export default function Book({
   angle = 'straight',
   hasBookmark = false,
   password,
-  isDark = false,
+  isDark = true,
 }: BookProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(privacy === 'public');
@@ -119,7 +119,7 @@ export default function Book({
         'relative cursor-pointer transition-all duration-300 transform-gpu',
         angle === 'tilted' && 'rotate-3 hover:rotate-0',
         angle === 'stacked' && 'rotate-6 translate-y-2 hover:rotate-0 hover:translate-y-0',
-        isHovered && 'scale-105 z-10 -translate-y-2',
+        isHovered && 'scale-105 z-10 -translate-y-1',
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -133,65 +133,62 @@ export default function Book({
           thicknessMap[thickness],
           heightMap[height],
           // 立体阴影效果
-          'shadow-[4px_4px_8px_rgba(0,0,0,0.3),8px_8px_16px_rgba(0,0,0,0.2),-1px_-1px_4px_rgba(255,255,255,0.1)]',
-          'hover:shadow-[6px_6px_12px_rgba(0,0,0,0.4),12px_12px_24px_rgba(0,0,0,0.25),-2px_-2px_6px_rgba(255,255,255,0.15)]',
-          importance === 'high' && 'ring-1 ring-white/30',
+          'shadow-[3px_3px_6px_rgba(0,0,0,0.4),6px_6px_12px_rgba(0,0,0,0.3),-1px_-1px_3px_rgba(255,255,255,0.1)]',
+          'hover:shadow-[5px_5px_10px_rgba(0,0,0,0.5),10px_10px_20px_rgba(0,0,0,0.3),-2px_-2px_5px_rgba(255,255,255,0.15)]',
+          importance === 'high' && 'ring-1 ring-white/40',
           !isUnlocked && 'opacity-70',
         )}
       >
-        {/* 书脊装饰 - 顶部高光 */}
-        <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-black/30 via-white/20 to-black/30" />
-        {/* 书脊装饰 - 底部阴影 */}
-        <div className="absolute inset-x-0 bottom-0 h-1.5 bg-gradient-to-r from-black/40 via-white/10 to-black/40" />
+        {/* 顶部高光 */}
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-black/30 via-white/30 to-black/30" />
+        {/* 底部阴影 */}
+        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-black/40 via-white/10 to-black/40" />
         
-        {/* 侧边立体效果 - 书脊厚度 */}
-        <div className="absolute left-0 inset-y-0 w-3 bg-gradient-to-r from-black/50 via-black/25 to-transparent" />
+        {/* 书脊立体效果 */}
+        <div className="absolute left-0 inset-y-0 w-2.5 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
         {/* 右侧高光 */}
-        <div className="absolute right-0 inset-y-0 w-1 bg-gradient-to-l from-white/20 to-transparent" />
+        <div className="absolute right-0 inset-y-0 w-1 bg-gradient-to-l from-white/30 to-transparent" />
         
-        {/* 柔和纹理 */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10" />
-        </div>
+        {/* 科技感光泽 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10 pointer-events-none" />
 
-        {/* 高重要度装饰 */}
-        {importance === 'high' && (
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5" />
-          </div>
+        {/* 高重要度装饰 - 发光效果 */}
+        {importance === 'high' && isDark && (
+          <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_20px_rgba(6,182,212,0.2)]" />
         )}
         
         {/* 书名区域 */}
-        <div className="flex-1 flex items-center justify-center p-2 rotate-180" style={{ writingMode: 'vertical-rl' }}>
+        <div className="flex-1 flex items-center justify-center p-1.5 rotate-180" style={{ writingMode: 'vertical-rl' }}>
           <span
             className={cn(
-              'text-xs font-bold text-white transition-all duration-300 [text-shadow:1px_1px_2px_rgba(0,0,0,0.8),-1px_-1px_1px_rgba(0,0,0,0.5)]',
+              'text-[11px] font-bold text-white transition-all duration-300',
+              '[text-shadow:1px_1px_2px_rgba(0,0,0,0.9),0_0_8px_rgba(0,0,0,0.5)]',
               !showTitle && 'blur-sm select-none',
               isPrivate && !isUnlocked && 'blur-md',
-              title.length > 10 && 'text-[10px]',
-              title.length > 15 && 'text-[9px]',
+              title.length > 8 && 'text-[10px]',
+              title.length > 12 && 'text-[9px]',
             )}
           >
-            {showTitle || !isPrivate ? title : '🔒 私密'}
+            {showTitle || !isPrivate ? title : '🔒'}
           </span>
         </div>
 
         {/* 书签 */}
         {hasBookmark && (
-          <div className="absolute -top-1 right-3 w-2 h-8 bg-gradient-to-b from-amber-400 to-amber-600 shadow-md transform -rotate-6 rounded-b-sm" />
+          <div className="absolute -top-0.5 right-2 w-1.5 h-6 bg-gradient-to-b from-cyan-400 to-cyan-600 shadow-lg transform -rotate-6 rounded-b-sm" />
         )}
 
         {/* 私密锁图标 */}
         {(isPrivate || isSemiPrivate) && !isUnlocked && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/40 rounded-full p-1.5 backdrop-blur-sm shadow-lg">
-            <Lock className="w-3.5 h-3.5 text-white drop-shadow" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 rounded-full p-1.5 backdrop-blur-sm">
+            <Lock className="w-3 h-3 text-white/90" />
           </div>
         )}
 
         {/* 解锁状态图标 */}
         {isPrivate && isUnlocked && (
-          <div className="absolute top-2 right-1.5 bg-black/30 rounded-full p-0.5 shadow">
-            <LockOpen className="w-2.5 h-2.5 text-white/90" />
+          <div className="absolute top-1.5 right-1 bg-black/40 rounded-full p-0.5">
+            <LockOpen className="w-2 h-2 text-white/80" />
           </div>
         )}
 
@@ -201,11 +198,11 @@ export default function Book({
         )}
       </div>
 
-      {/* 悬停时的底部阴影 */}
+      {/* 悬停底部阴影 */}
       {isHovered && (
         <div className={cn(
-          'absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-4/5 h-3 blur-md rounded-full',
-          isDark ? 'bg-black/40' : 'bg-black/20'
+          'absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-2 blur-md rounded-full',
+          isDark ? 'bg-black/50' : 'bg-black/20'
         )} />
       )}
 
@@ -213,50 +210,46 @@ export default function Book({
       {showPasswordInput && (
         <div 
           className={cn(
-            'absolute top-full left-1/2 transform -translate-x-1/2 mt-3 z-50 p-4 rounded-xl shadow-2xl border backdrop-blur-sm',
+            'absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50 p-3 rounded-lg shadow-xl border',
             isDark 
-              ? 'bg-slate-800 border-slate-700' 
-              : 'bg-stone-50 border-stone-200'
+              ? 'bg-slate-800 border-cyan-500/30' 
+              : 'bg-white border-blue-200'
           )}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="text-center mb-3">
+          <div className="text-center mb-2">
             <Lock className={cn(
-              'w-5 h-5 mx-auto mb-1',
-              isDark ? 'text-stone-400' : 'text-stone-500'
+              'w-4 h-4 mx-auto mb-1',
+              isDark ? 'text-cyan-400' : 'text-blue-500'
             )} />
             <p className={cn(
               'text-xs',
-              isDark ? 'text-stone-400' : 'text-stone-500'
+              isDark ? 'text-slate-300' : 'text-slate-600'
             )}>
-              请输入密码解锁
+              输入密码
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5">
             <input
               type="password"
               value={passwordInput}
               onChange={(e) => setPasswordInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handlePasswordSubmit()}
-              placeholder="密码"
               className={cn(
-                'px-3 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-1 w-24',
+                'px-2 py-1 text-xs border rounded focus:outline-none w-20',
                 isDark 
-                  ? 'bg-slate-700 border-slate-600 text-stone-200 placeholder-stone-500 focus:ring-stone-500' 
-                  : 'bg-white border-stone-200 text-stone-700 placeholder-stone-400 focus:ring-stone-400'
+                  ? 'bg-slate-700 border-slate-600 text-white' 
+                  : 'bg-white border-slate-200 text-slate-700'
               )}
               autoFocus
             />
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePasswordSubmit();
-              }}
+              onClick={(e) => { e.stopPropagation(); handlePasswordSubmit(); }}
               className={cn(
-                'px-3 py-1.5 text-sm rounded-lg transition-colors font-medium',
+                'px-2 py-1 text-xs rounded font-medium',
                 isDark 
-                  ? 'bg-slate-700 text-stone-200 hover:bg-slate-600' 
-                  : 'bg-stone-200 text-stone-700 hover:bg-stone-300'
+                  ? 'bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30' 
+                  : 'bg-blue-500 text-white hover:bg-blue-600'
               )}
             >
               解锁
