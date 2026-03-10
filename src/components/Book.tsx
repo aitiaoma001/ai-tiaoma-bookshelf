@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Lock, LockOpen, Sparkles } from 'lucide-react';
+import { Lock, LockOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface BookProps {
@@ -19,42 +19,43 @@ export interface BookProps {
   isDark?: boolean;
 }
 
+// 柔和的配色方案
 const colorMap: Record<string, { light: string; dark: string }> = {
   red: { 
-    light: 'from-red-500 via-red-600 to-red-700', 
-    dark: 'from-red-600 via-red-700 to-red-800' 
+    light: 'from-rose-400 via-rose-500 to-rose-600', 
+    dark: 'from-rose-600 via-rose-700 to-rose-800' 
   },
   blue: { 
-    light: 'from-blue-500 via-blue-600 to-blue-700', 
-    dark: 'from-blue-600 via-blue-700 to-blue-800' 
+    light: 'from-sky-400 via-sky-500 to-sky-600', 
+    dark: 'from-sky-700 via-sky-800 to-sky-900' 
   },
   green: { 
-    light: 'from-emerald-500 via-emerald-600 to-emerald-700', 
-    dark: 'from-emerald-600 via-emerald-700 to-emerald-800' 
+    light: 'from-emerald-400 via-emerald-500 to-emerald-600', 
+    dark: 'from-emerald-700 via-emerald-800 to-emerald-900' 
   },
   purple: { 
-    light: 'from-purple-500 via-purple-600 to-purple-700', 
-    dark: 'from-purple-600 via-purple-700 to-purple-800' 
+    light: 'from-violet-400 via-violet-500 to-violet-600', 
+    dark: 'from-violet-700 via-violet-800 to-violet-900' 
   },
   amber: { 
-    light: 'from-amber-500 via-amber-600 to-amber-700', 
-    dark: 'from-amber-600 via-amber-700 to-amber-800' 
+    light: 'from-amber-400 via-amber-500 to-amber-600', 
+    dark: 'from-amber-700 via-amber-800 to-amber-900' 
   },
   pink: { 
-    light: 'from-pink-500 via-pink-600 to-pink-700', 
-    dark: 'from-pink-600 via-pink-700 to-pink-800' 
+    light: 'from-pink-400 via-pink-500 to-pink-600', 
+    dark: 'from-pink-700 via-pink-800 to-pink-900' 
   },
   teal: { 
-    light: 'from-teal-500 via-teal-600 to-teal-700', 
-    dark: 'from-teal-600 via-teal-700 to-teal-800' 
+    light: 'from-teal-400 via-teal-500 to-teal-600', 
+    dark: 'from-teal-700 via-teal-800 to-teal-900' 
   },
   indigo: { 
-    light: 'from-indigo-500 via-indigo-600 to-indigo-700', 
-    dark: 'from-indigo-600 via-indigo-700 to-indigo-800' 
+    light: 'from-indigo-400 via-indigo-500 to-indigo-600', 
+    dark: 'from-indigo-700 via-indigo-800 to-indigo-900' 
   },
   gray: { 
-    light: 'from-gray-500 via-gray-600 to-gray-700', 
-    dark: 'from-gray-600 via-gray-700 to-gray-800' 
+    light: 'from-slate-400 via-slate-500 to-slate-600', 
+    dark: 'from-slate-600 via-slate-700 to-slate-800' 
   },
 };
 
@@ -131,29 +132,28 @@ export default function Book({
           bookColor,
           thicknessMap[thickness],
           heightMap[height],
-          importance === 'high' && 'ring-2 ring-amber-400/50 shadow-lg shadow-amber-500/20',
-          importance === 'medium' && 'shadow-md',
+          importance === 'high' && 'ring-1 ring-stone-400/50 shadow-md',
+          importance === 'medium' && 'shadow-sm',
           importance === 'low' && 'shadow-sm',
-          !isUnlocked && 'opacity-70 grayscale-[30%]',
+          !isUnlocked && 'opacity-70',
         )}
       >
         {/* 书脊装饰 */}
-        <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-black/40 via-white/30 to-black/40" />
-        <div className="absolute inset-x-0 bottom-0 h-1.5 bg-gradient-to-r from-black/40 via-white/30 to-black/40" />
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-black/20 via-white/10 to-black/20" />
+        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-black/20 via-white/10 to-black/20" />
         
         {/* 侧边阴影 - 模拟书脊厚度 */}
-        <div className="absolute left-0 inset-y-0 w-3 bg-gradient-to-r from-black/50 via-black/30 to-transparent" />
+        <div className="absolute left-0 inset-y-0 w-2.5 bg-gradient-to-r from-black/30 via-black/15 to-transparent" />
         
-        {/* 装饰纹理 */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-black/20" />
+        {/* 柔和纹理 */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10" />
         </div>
 
-        {/* 高重要度金边效果 */}
+        {/* 高重要度装饰 */}
         {importance === 'high' && (
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-300/20 via-transparent to-amber-300/10" />
-            <div className="absolute inset-0 ring-1 ring-inset ring-amber-300/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5" />
           </div>
         )}
         
@@ -161,59 +161,46 @@ export default function Book({
         <div className="flex-1 flex items-center justify-center p-2 rotate-180" style={{ writingMode: 'vertical-rl' }}>
           <span
             className={cn(
-              'text-xs font-medium text-white transition-all duration-300 drop-shadow-sm',
+              'text-xs font-medium text-white/95 transition-all duration-300',
               !showTitle && 'blur-sm select-none',
               isPrivate && !isUnlocked && 'blur-md',
               title.length > 10 && 'text-[10px]',
             )}
           >
-            {showTitle || !isPrivate ? title : '🔒 私密内容'}
+            {showTitle || !isPrivate ? title : '🔒 私密'}
           </span>
         </div>
 
         {/* 书签 */}
         {hasBookmark && (
-          <div className="absolute -top-1 right-3 w-2.5 h-10 bg-gradient-to-b from-amber-400 via-amber-500 to-red-500 shadow-md transform -rotate-6 rounded-b-sm">
-            <div className="absolute bottom-0 left-0 right-0 h-2 border-l-4 border-r-4 border-l-transparent border-r-transparent border-b-amber-600" />
-          </div>
+          <div className="absolute -top-1 right-3 w-2 h-8 bg-gradient-to-b from-amber-400 to-amber-600 shadow-sm transform -rotate-6 rounded-b-sm" />
         )}
 
         {/* 私密锁图标 */}
         {(isPrivate || isSemiPrivate) && !isUnlocked && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/30 rounded-full p-2 backdrop-blur-sm">
-            <Lock className="w-4 h-4 text-white" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/20 rounded-full p-1.5 backdrop-blur-sm">
+            <Lock className="w-3.5 h-3.5 text-white/90" />
           </div>
         )}
 
         {/* 解锁状态图标 */}
         {isPrivate && isUnlocked && (
-          <div className="absolute top-2 right-1.5 bg-black/30 rounded-full p-1">
-            <LockOpen className="w-3 h-3 text-white/80" />
+          <div className="absolute top-2 right-1.5 bg-black/20 rounded-full p-0.5">
+            <LockOpen className="w-2.5 h-2.5 text-white/80" />
           </div>
         )}
 
         {/* 悬停效果 */}
         {isHovered && isUnlocked && (
-          <>
-            <div className="absolute inset-0 bg-white/10 pointer-events-none" />
-            {/* 光泽效果 */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
-          </>
-        )}
-
-        {/* 重要书籍的星星标记 */}
-        {importance === 'high' && (
-          <div className="absolute top-2 left-1/2 transform -translate-x-1/2">
-            <Sparkles className="w-3 h-3 text-amber-300 drop-shadow" />
-          </div>
+          <div className="absolute inset-0 bg-white/5 pointer-events-none" />
         )}
       </div>
 
       {/* 悬停时的阴影 */}
       {isHovered && (
         <div className={cn(
-          'absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-3 blur-md rounded-full',
-          isDark ? 'bg-black/40' : 'bg-black/20'
+          'absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-2 blur-md rounded-full',
+          isDark ? 'bg-black/30' : 'bg-black/10'
         )} />
       )}
 
@@ -221,21 +208,21 @@ export default function Book({
       {showPasswordInput && (
         <div 
           className={cn(
-            'absolute top-full left-1/2 transform -translate-x-1/2 mt-3 z-50 p-4 rounded-xl shadow-2xl border backdrop-blur-xl',
+            'absolute top-full left-1/2 transform -translate-x-1/2 mt-3 z-50 p-4 rounded-xl shadow-xl border backdrop-blur-sm',
             isDark 
-              ? 'bg-gray-800 border-gray-700' 
-              : 'bg-white border-amber-200'
+              ? 'bg-slate-800 border-slate-700' 
+              : 'bg-stone-50 border-stone-200'
           )}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-center mb-3">
             <Lock className={cn(
-              'w-6 h-6 mx-auto mb-1',
-              isDark ? 'text-amber-400' : 'text-amber-600'
+              'w-5 h-5 mx-auto mb-1',
+              isDark ? 'text-stone-400' : 'text-stone-500'
             )} />
             <p className={cn(
-              'text-xs font-medium',
-              isDark ? 'text-gray-300' : 'text-gray-600'
+              'text-xs',
+              isDark ? 'text-stone-400' : 'text-stone-500'
             )}>
               请输入密码解锁
             </p>
@@ -248,10 +235,10 @@ export default function Book({
               onKeyDown={(e) => e.key === 'Enter' && handlePasswordSubmit()}
               placeholder="密码"
               className={cn(
-                'px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 w-28',
+                'px-3 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-1 w-24',
                 isDark 
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                  : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400'
+                  ? 'bg-slate-700 border-slate-600 text-stone-200 placeholder-stone-500 focus:ring-stone-500' 
+                  : 'bg-white border-stone-200 text-stone-700 placeholder-stone-400 focus:ring-stone-400'
               )}
               autoFocus
             />
@@ -260,7 +247,12 @@ export default function Book({
                 e.stopPropagation();
                 handlePasswordSubmit();
               }}
-              className="px-4 py-2 text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:from-amber-600 hover:to-orange-600 transition-colors font-medium shadow-md"
+              className={cn(
+                'px-3 py-1.5 text-sm rounded-lg transition-colors font-medium',
+                isDark 
+                  ? 'bg-slate-700 text-stone-200 hover:bg-slate-600' 
+                  : 'bg-stone-200 text-stone-700 hover:bg-stone-300'
+              )}
             >
               解锁
             </button>

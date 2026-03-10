@@ -38,49 +38,38 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
     <div className={cn(
       'relative w-full min-h-screen transition-colors duration-500',
       isDark 
-        ? 'bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900' 
-        : 'bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100'
+        ? 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900' 
+        : 'bg-gradient-to-b from-stone-100 via-stone-50 to-stone-100'
     )}>
-      {/* 动态背景装饰 */}
+      {/* 柔和背景装饰 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* 浮动光斑 */}
+        {/* 淡化浮动光斑 */}
         <div className={cn(
-          'absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl animate-pulse',
-          isDark ? 'bg-purple-500/20' : 'bg-amber-300/30'
+          'absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl',
+          isDark ? 'bg-slate-600/10' : 'bg-stone-300/20'
         )} />
         <div className={cn(
-          'absolute top-40 right-20 w-96 h-96 rounded-full blur-3xl animate-pulse delay-1000',
-          isDark ? 'bg-blue-500/20' : 'bg-orange-300/30'
+          'absolute top-40 right-20 w-96 h-96 rounded-full blur-3xl',
+          isDark ? 'bg-slate-500/10' : 'bg-stone-200/20'
         )} />
         <div className={cn(
-          'absolute bottom-40 left-1/3 w-80 h-80 rounded-full blur-3xl animate-pulse delay-500',
-          isDark ? 'bg-pink-500/20' : 'bg-yellow-300/30'
+          'absolute bottom-40 left-1/3 w-80 h-80 rounded-full blur-3xl',
+          isDark ? 'bg-slate-600/10' : 'bg-stone-300/20'
         )} />
-        
-        {/* 网格背景 */}
-        <div className={cn(
-          'absolute inset-0 opacity-5',
-          isDark ? 'bg-white' : 'bg-black'
-        )}>
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} />
-        </div>
       </div>
 
       {/* 导航栏 */}
       <nav className={cn(
         'sticky top-0 z-50 backdrop-blur-xl border-b transition-colors duration-300',
         isDark 
-          ? 'bg-gray-900/80 border-gray-700/50' 
-          : 'bg-white/80 border-amber-200/50'
+          ? 'bg-slate-900/90 border-slate-700/50' 
+          : 'bg-stone-50/90 border-stone-200/50'
       )}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo 和品牌名 */}
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg ring-2 ring-amber-400/50">
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-md ring-1 ring-stone-300/50">
                 <Image
                   src="/logo.png"
                   alt="AI 跳马 Logo"
@@ -90,13 +79,14 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
               </div>
               <div className="flex flex-col">
                 <span className={cn(
-                  'font-bold text-lg leading-tight bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent',
+                  'font-semibold text-base leading-tight',
+                  isDark ? 'text-stone-200' : 'text-stone-700'
                 )}>
                   AI 跳马
                 </span>
                 <span className={cn(
                   'text-xs leading-tight',
-                  isDark ? 'text-gray-400' : 'text-gray-500'
+                  isDark ? 'text-stone-500' : 'text-stone-400'
                 )}>
                   aitiaoma.com
                 </span>
@@ -106,14 +96,14 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
             {/* 桌面端导航 */}
             <div className="hidden md:flex items-center gap-6">
               <a href="#loft" className={cn(
-                'text-sm font-medium transition-colors hover:text-amber-500',
-                isDark ? 'text-gray-300' : 'text-gray-600'
+                'text-sm font-medium transition-colors',
+                isDark ? 'text-stone-400 hover:text-stone-200' : 'text-stone-500 hover:text-stone-700'
               )}>
                 私密跃层
               </a>
               <a href="#main" className={cn(
-                'text-sm font-medium transition-colors hover:text-amber-500',
-                isDark ? 'text-gray-300' : 'text-gray-600'
+                'text-sm font-medium transition-colors',
+                isDark ? 'text-stone-400 hover:text-stone-200' : 'text-stone-500 hover:text-stone-700'
               )}>
                 主藏书区
               </a>
@@ -122,8 +112,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                 className={cn(
                   'p-2 rounded-full transition-colors',
                   isDark 
-                    ? 'bg-gray-800 text-amber-400 hover:bg-gray-700' 
-                    : 'bg-amber-100 text-amber-600 hover:bg-amber-200'
+                    ? 'bg-slate-800 text-stone-300 hover:bg-slate-700' 
+                    : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
                 )}
               >
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -137,8 +127,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                 className={cn(
                   'p-2 rounded-full transition-colors',
                   isDark 
-                    ? 'bg-gray-800 text-amber-400' 
-                    : 'bg-amber-100 text-amber-600'
+                    ? 'bg-slate-800 text-stone-300' 
+                    : 'bg-stone-100 text-stone-500'
                 )}
               >
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -148,8 +138,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                 className={cn(
                   'p-2 rounded-full transition-colors',
                   isDark 
-                    ? 'bg-gray-800 text-gray-300' 
-                    : 'bg-amber-100 text-gray-600'
+                    ? 'bg-slate-800 text-stone-300' 
+                    : 'bg-stone-100 text-stone-500'
                 )}
               >
                 {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -161,7 +151,7 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
           {isMenuOpen && (
             <div className={cn(
               'md:hidden py-4 border-t transition-colors',
-              isDark ? 'border-gray-700' : 'border-amber-200'
+              isDark ? 'border-slate-700' : 'border-stone-200'
             )}>
               <div className="flex flex-col gap-3">
                 <a 
@@ -170,8 +160,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                     isDark 
-                      ? 'text-gray-300 hover:bg-gray-800' 
-                      : 'text-gray-600 hover:bg-amber-100'
+                      ? 'text-stone-400 hover:bg-slate-800' 
+                      : 'text-stone-500 hover:bg-stone-100'
                   )}
                 >
                   私密跃层
@@ -182,8 +172,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                     isDark 
-                      ? 'text-gray-300 hover:bg-gray-800' 
-                      : 'text-gray-600 hover:bg-amber-100'
+                      ? 'text-stone-400 hover:bg-slate-800' 
+                      : 'text-stone-500 hover:bg-stone-100'
                   )}
                 >
                   主藏书区
@@ -200,37 +190,38 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
           <div className={cn(
               'inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 backdrop-blur-sm border',
               isDark 
-                ? 'bg-gray-800/50 border-gray-700/50' 
-                : 'bg-white/50 border-amber-200/50'
+                ? 'bg-slate-800/50 border-slate-700/50' 
+                : 'bg-stone-50 border-stone-200/50'
             )}
           >
-            <Sparkles className="w-4 h-4 text-amber-500" />
+            <Sparkles className={cn(
+              'w-4 h-4',
+              isDark ? 'text-stone-400' : 'text-stone-500'
+            )} />
             <span className={cn(
               'text-sm font-medium',
-              isDark ? 'text-amber-300' : 'text-amber-700'
+              isDark ? 'text-stone-300' : 'text-stone-600'
             )}>
               思维的殿堂
             </span>
           </div>
           
           <h1 className={cn(
-            'text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r bg-clip-text text-transparent',
-            isDark 
-              ? 'from-amber-300 via-orange-400 to-amber-300' 
-              : 'from-amber-600 via-orange-500 to-amber-600'
+            'text-3xl md:text-5xl font-bold mb-4',
+            isDark ? 'text-stone-100' : 'text-stone-800'
           )}>
             我的思维书架
           </h1>
           
           <p className={cn(
-            'text-lg md:text-xl max-w-2xl mx-auto',
-            isDark ? 'text-gray-400' : 'text-amber-700/80'
+            'text-base md:text-lg max-w-2xl mx-auto',
+            isDark ? 'text-stone-400' : 'text-stone-500'
           )}>
             每一本书，都是思想的结晶；每一页，都是智慧的积累
           </p>
 
           {/* 统计数据 */}
-          <div className="flex justify-center gap-8 mt-8">
+          <div className="flex justify-center gap-6 mt-8">
             {[
               { label: '藏书', value: shelves.reduce((acc, s) => acc + s.books.length, 0) },
               { label: '分类', value: shelves.length },
@@ -239,21 +230,21 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
               <div 
                 key={index}
                 className={cn(
-                  'text-center px-6 py-3 rounded-xl backdrop-blur-sm border transition-colors',
+                  'text-center px-5 py-2.5 rounded-xl backdrop-blur-sm border transition-colors',
                   isDark 
-                    ? 'bg-gray-800/30 border-gray-700/30' 
-                    : 'bg-white/30 border-amber-200/30'
+                    ? 'bg-slate-800/30 border-slate-700/30' 
+                    : 'bg-stone-50/50 border-stone-200/50'
                 )}
               >
                 <div className={cn(
-                  'text-2xl font-bold',
-                  isDark ? 'text-amber-400' : 'text-amber-600'
+                  'text-xl font-semibold',
+                  isDark ? 'text-stone-200' : 'text-stone-700'
                 )}>
                   {stat.value}
                 </div>
                 <div className={cn(
                   'text-xs',
-                  isDark ? 'text-gray-500' : 'text-gray-600'
+                  isDark ? 'text-stone-500' : 'text-stone-400'
                 )}>
                   {stat.label}
                 </div>
@@ -269,14 +260,14 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
               <div className={cn(
                 'h-px flex-1',
                 isDark 
-                  ? 'bg-gradient-to-r from-transparent via-purple-500/50 to-transparent' 
-                  : 'bg-gradient-to-r from-transparent via-amber-400 to-transparent'
+                  ? 'bg-gradient-to-r from-transparent via-slate-600 to-transparent' 
+                  : 'bg-gradient-to-r from-transparent via-stone-300 to-transparent'
               )} />
               <span className={cn(
                 'px-4 py-1.5 rounded-full text-sm font-medium flex items-center gap-2',
                 isDark 
-                  ? 'bg-purple-900/50 text-purple-300 border border-purple-500/30' 
-                  : 'bg-amber-200 text-amber-800'
+                  ? 'bg-slate-800 text-stone-300 border border-slate-700' 
+                  : 'bg-stone-100 text-stone-600 border border-stone-200'
               )}>
                 <span>🔐</span>
                 私密跃层
@@ -284,24 +275,24 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
               <div className={cn(
                 'h-px flex-1',
                 isDark 
-                  ? 'bg-gradient-to-r from-transparent via-purple-500/50 to-transparent' 
-                  : 'bg-gradient-to-r from-transparent via-amber-400 to-transparent'
+                  ? 'bg-gradient-to-r from-transparent via-slate-600 to-transparent' 
+                  : 'bg-gradient-to-r from-transparent via-stone-300 to-transparent'
               )} />
             </div>
 
             {/* 跃层书架 */}
             <div className={cn(
-              'relative rounded-2xl p-8 border-2 transition-colors duration-300',
+              'relative rounded-2xl p-6 md:p-8 border transition-colors duration-300',
               isDark 
-                ? 'bg-gradient-to-br from-purple-900/20 to-gray-800/50 border-purple-500/30' 
-                : 'bg-gradient-to-br from-amber-100/80 to-orange-50/50 border-amber-300/50'
+                ? 'bg-slate-800/30 border-slate-700/50' 
+                : 'bg-stone-50/80 border-stone-200/50'
             )}>
               {/* 阁楼顶部装饰 */}
               <div className={cn(
-                'absolute -top-3 left-8 right-8 h-6 rounded-t-xl transition-colors',
+                'absolute -top-3 left-8 right-8 h-5 rounded-t-xl transition-colors',
                 isDark 
-                  ? 'bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700' 
-                  : 'bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700'
+                  ? 'bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700' 
+                  : 'bg-gradient-to-r from-stone-400 via-stone-300 to-stone-400'
               )} />
               
               {/* 装饰：楼梯 */}
@@ -310,10 +301,10 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                   <div
                     key={i}
                     className={cn(
-                      'w-6 h-3 rounded-sm shadow-lg transition-colors',
+                      'w-6 h-3 rounded-sm shadow',
                       isDark 
-                        ? 'bg-gradient-to-r from-gray-600 to-gray-500' 
-                        : 'bg-gradient-to-r from-amber-600 to-amber-500'
+                        ? 'bg-gradient-to-r from-slate-700 to-slate-600' 
+                        : 'bg-gradient-to-r from-stone-400 to-stone-300'
                     )}
                     style={{ marginLeft: `${i * 10}px` }}
                   />
@@ -322,13 +313,13 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
 
               {/* 阁楼窗户装饰 */}
               <div className={cn(
-                  'absolute top-4 right-8 w-16 h-16 rounded-full border-4 opacity-30 hidden md:block',
-                  isDark ? 'border-purple-400' : 'border-amber-500'
+                  'absolute top-4 right-8 w-14 h-14 rounded-full border-2 hidden md:block',
+                  isDark ? 'border-slate-600/50' : 'border-stone-300/50'
                 )}
               >
                 <div className={cn(
                   'absolute inset-2 rounded-full',
-                  isDark ? 'bg-purple-400/20' : 'bg-amber-500/20'
+                  isDark ? 'bg-slate-700/30' : 'bg-stone-200/30'
                 )} />
               </div>
 
@@ -336,8 +327,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                 <div key={shelf.id} className="mb-10 last:mb-0 relative">
                   <div className="flex items-center gap-3 mb-5">
                     <span className={cn(
-                      'text-sm font-semibold',
-                      isDark ? 'text-purple-300' : 'text-amber-700'
+                      'text-sm font-medium',
+                      isDark ? 'text-stone-300' : 'text-stone-600'
                     )}>
                       {shelf.name}
                     </span>
@@ -345,8 +336,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                       <span className={cn(
                         'px-2.5 py-1 text-xs rounded-full flex items-center gap-1',
                         isDark 
-                          ? 'bg-red-900/50 text-red-300 border border-red-500/30' 
-                          : 'bg-red-100 text-red-600'
+                          ? 'bg-slate-700 text-stone-300 border border-slate-600' 
+                          : 'bg-stone-200 text-stone-500'
                       )}>
                         🔒 需密码
                       </span>
@@ -355,19 +346,11 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                   
                   {/* 书架隔板 */}
                   <div className={cn(
-                    'relative rounded-xl p-5 shadow-inner transition-colors',
+                    'relative rounded-xl p-5 transition-colors',
                     isDark 
-                      ? 'bg-gray-800/50 border border-gray-700/50' 
-                      : 'bg-white/50 border border-amber-100'
+                      ? 'bg-slate-800/50' 
+                      : 'bg-stone-50'
                   )}>
-                    {/* 木纹效果 */}
-                    <div className={cn(
-                      'absolute inset-0 opacity-10 rounded-xl',
-                      isDark 
-                        ? 'bg-gradient-to-r from-transparent via-purple-500 to-transparent' 
-                        : 'bg-gradient-to-r from-transparent via-amber-600 to-transparent'
-                    )} />
-                    
                     <div className="relative flex items-end gap-4 min-h-[300px] overflow-x-auto pb-4">
                       {shelf.books.map((book) => (
                         <Book key={book.id} {...book} isDark={isDark} />
@@ -377,18 +360,11 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
 
                   {/* 书架底部装饰 */}
                   <div className={cn(
-                    'h-5 rounded-b-xl shadow-xl mt-2 relative overflow-hidden',
+                    'h-4 rounded-b-xl mt-1.5 relative overflow-hidden',
                     isDark 
-                      ? 'bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700' 
-                      : 'bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700'
-                  )}>
-                    <div className={cn(
-                      'absolute inset-0 opacity-20',
-                      isDark 
-                        ? 'bg-gradient-to-r from-transparent via-purple-400 to-transparent' 
-                        : 'bg-gradient-to-r from-transparent via-amber-400 to-transparent'
-                    )} />
-                  </div>
+                      ? 'bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700' 
+                      : 'bg-gradient-to-r from-stone-400 via-stone-300 to-stone-400'
+                  )} />
                 </div>
               ))}
             </div>
@@ -401,14 +377,14 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
             <div className={cn(
               'h-px flex-1',
               isDark 
-                ? 'bg-gradient-to-r from-transparent via-amber-500/50 to-transparent' 
-                : 'bg-gradient-to-r from-transparent via-amber-400 to-transparent'
+                ? 'bg-gradient-to-r from-transparent via-slate-600 to-transparent' 
+                : 'bg-gradient-to-r from-transparent via-stone-300 to-transparent'
             )} />
             <span className={cn(
               'px-4 py-1.5 rounded-full text-sm font-medium flex items-center gap-2',
               isDark 
-                ? 'bg-amber-900/30 text-amber-300 border border-amber-500/30' 
-                : 'bg-amber-200 text-amber-800'
+                ? 'bg-slate-800 text-stone-300 border border-slate-700' 
+                : 'bg-stone-100 text-stone-600 border border-stone-200'
             )}>
               <span>📖</span>
               主藏书区
@@ -416,8 +392,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
             <div className={cn(
               'h-px flex-1',
               isDark 
-                ? 'bg-gradient-to-r from-transparent via-amber-500/50 to-transparent' 
-                : 'bg-gradient-to-r from-transparent via-amber-400 to-transparent'
+                ? 'bg-gradient-to-r from-transparent via-slate-600 to-transparent' 
+                : 'bg-gradient-to-r from-transparent via-stone-300 to-transparent'
             )} />
           </div>
 
@@ -425,16 +401,16 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
             <div key={shelf.id} className="mb-12">
               <div className="flex items-center gap-3 mb-5">
                 <span className={cn(
-                  'text-sm font-semibold',
-                  isDark ? 'text-amber-300' : 'text-amber-700'
+                  'text-sm font-medium',
+                  isDark ? 'text-stone-300' : 'text-stone-600'
                 )}>
                   {shelf.name}
                 </span>
                 <span className={cn(
                   'text-xs px-2 py-0.5 rounded-full',
                   isDark 
-                    ? 'bg-gray-800 text-gray-400' 
-                    : 'bg-amber-100 text-amber-600'
+                    ? 'bg-slate-800 text-stone-400' 
+                    : 'bg-stone-100 text-stone-500'
                 )}>
                   {shelf.books.length} 本
                 </span>
@@ -442,19 +418,11 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
               
               {/* 书架隔板 */}
               <div className={cn(
-                'relative rounded-xl p-6 shadow-inner transition-colors border',
+                'relative rounded-xl p-6 transition-colors',
                 isDark 
-                  ? 'bg-gray-800/50 border-gray-700/30' 
-                  : 'bg-white/70 border-amber-100/50'
+                  ? 'bg-slate-800/30' 
+                  : 'bg-stone-50'
               )}>
-                {/* 木纹效果 */}
-                <div className={cn(
-                  'absolute inset-0 opacity-5 rounded-xl',
-                  isDark 
-                    ? 'bg-gradient-to-r from-transparent via-amber-500 to-transparent' 
-                    : 'bg-gradient-to-r from-transparent via-amber-800 to-transparent'
-                )} />
-                
                 <div className="relative flex items-end gap-3 min-h-[280px] overflow-x-auto pb-3 flex-wrap">
                   {shelf.books.map((book) => (
                     <Book key={book.id} {...book} isDark={isDark} />
@@ -464,25 +432,18 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
 
               {/* 书架底部装饰 */}
               <div className={cn(
-                'h-6 rounded-b-xl shadow-xl mt-2 relative overflow-hidden',
+                'h-5 rounded-b-xl mt-1.5 relative overflow-hidden',
                 isDark 
-                  ? 'bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700' 
-                  : 'bg-gradient-to-r from-amber-800 via-amber-700 to-amber-800'
+                  ? 'bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700' 
+                  : 'bg-gradient-to-r from-stone-400 via-stone-300 to-stone-400'
               )}>
-                {/* 木纹纹理 */}
                 <div className="absolute inset-0 opacity-30">
-                  <div className={cn(
-                    'absolute inset-0',
-                    isDark 
-                      ? 'bg-gradient-to-r from-transparent via-amber-500/30 to-transparent' 
-                      : 'bg-gradient-to-r from-transparent via-amber-400 to-transparent'
-                  )} />
                   {[...Array(3)].map((_, i) => (
                     <div
                       key={i}
                       className={cn(
                         'absolute h-px',
-                        isDark ? 'bg-gray-500/30' : 'bg-amber-900/20'
+                        isDark ? 'bg-slate-500/30' : 'bg-stone-500/20'
                       )}
                       style={{
                         top: `${(i + 1) * 25}%`,
@@ -502,8 +463,8 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
           <div className={cn(
             'inline-block px-8 py-5 rounded-2xl backdrop-blur-sm border transition-colors',
             isDark 
-              ? 'bg-gray-800/50 border-gray-700/50' 
-              : 'bg-white/50 border-amber-200/50'
+              ? 'bg-slate-800/50 border-slate-700/50' 
+              : 'bg-stone-50 border-stone-200/50'
           )}>
             <div className="flex items-center justify-center gap-3 mb-3">
               <div className="relative w-8 h-8 rounded-lg overflow-hidden">
@@ -515,21 +476,21 @@ export default function Bookshelf({ shelves }: BookshelfProps) {
                 />
               </div>
               <span className={cn(
-                'font-semibold',
-                isDark ? 'text-amber-400' : 'text-amber-700'
+                'font-medium',
+                isDark ? 'text-stone-200' : 'text-stone-600'
               )}>
                 AI 跳马
               </span>
             </div>
             <p className={cn(
               'text-sm',
-              isDark ? 'text-gray-500' : 'text-gray-600'
+              isDark ? 'text-stone-400' : 'text-stone-500'
             )}>
               书架上的每一本书，都是思维的结晶
             </p>
             <p className={cn(
               'text-xs mt-2',
-              isDark ? 'text-gray-600' : 'text-gray-400'
+              isDark ? 'text-stone-600' : 'text-stone-400'
             )}>
               aitiaoma.com
             </p>
