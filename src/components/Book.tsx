@@ -19,43 +19,43 @@ export interface BookProps {
   isDark?: boolean;
 }
 
-// 柔和的配色方案
+// 鲜艳的配色方案 - 高对比度
 const colorMap: Record<string, { light: string; dark: string }> = {
   red: { 
-    light: 'from-rose-500 via-rose-600 to-rose-700', 
-    dark: 'from-rose-600 via-rose-700 to-rose-800' 
+    light: 'from-rose-400 via-red-500 to-rose-600', 
+    dark: 'from-rose-500 via-red-600 to-rose-700' 
   },
   blue: { 
-    light: 'from-sky-500 via-sky-600 to-sky-700', 
-    dark: 'from-sky-600 via-sky-700 to-sky-800' 
+    light: 'from-blue-400 via-blue-500 to-indigo-600', 
+    dark: 'from-blue-500 via-blue-600 to-indigo-700' 
   },
   green: { 
-    light: 'from-emerald-500 via-emerald-600 to-emerald-700', 
-    dark: 'from-emerald-600 via-emerald-700 to-emerald-800' 
+    light: 'from-emerald-400 via-green-500 to-teal-600', 
+    dark: 'from-emerald-500 via-green-600 to-teal-700' 
   },
   purple: { 
-    light: 'from-violet-500 via-violet-600 to-violet-700', 
-    dark: 'from-violet-600 via-violet-700 to-violet-800' 
+    light: 'from-fuchsia-400 via-purple-500 to-violet-600', 
+    dark: 'from-fuchsia-500 via-purple-600 to-violet-700' 
   },
   amber: { 
-    light: 'from-amber-500 via-amber-600 to-amber-700', 
-    dark: 'from-amber-600 via-amber-700 to-amber-800' 
+    light: 'from-yellow-400 via-amber-500 to-orange-600', 
+    dark: 'from-yellow-500 via-amber-600 to-orange-700' 
   },
   pink: { 
-    light: 'from-pink-500 via-pink-600 to-pink-700', 
-    dark: 'from-pink-600 via-pink-700 to-pink-800' 
+    light: 'from-pink-400 via-rose-500 to-pink-600', 
+    dark: 'from-pink-500 via-rose-600 to-pink-700' 
   },
   teal: { 
-    light: 'from-teal-500 via-teal-600 to-teal-700', 
-    dark: 'from-teal-600 via-teal-700 to-teal-800' 
+    light: 'from-cyan-400 via-teal-500 to-emerald-600', 
+    dark: 'from-cyan-500 via-teal-600 to-emerald-700' 
   },
   indigo: { 
-    light: 'from-indigo-500 via-indigo-600 to-indigo-700', 
-    dark: 'from-indigo-600 via-indigo-700 to-indigo-800' 
+    light: 'from-violet-400 via-indigo-500 to-blue-600', 
+    dark: 'from-violet-500 via-indigo-600 to-blue-700' 
   },
   gray: { 
-    light: 'from-slate-500 via-slate-600 to-slate-700', 
-    dark: 'from-slate-600 via-slate-700 to-slate-800' 
+    light: 'from-slate-400 via-gray-500 to-zinc-600', 
+    dark: 'from-slate-500 via-gray-600 to-zinc-700' 
   },
 };
 
@@ -165,7 +165,7 @@ export default function Book({
         <div className="flex-1 flex items-center justify-center p-2 rotate-180" style={{ writingMode: 'vertical-rl' }}>
           <span
             className={cn(
-              'text-xs font-bold text-stone-800 transition-all duration-300 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]',
+              'text-xs font-bold text-white transition-all duration-300 [text-shadow:1px_1px_2px_rgba(0,0,0,0.8),-1px_-1px_1px_rgba(0,0,0,0.5)]',
               !showTitle && 'blur-sm select-none',
               isPrivate && !isUnlocked && 'blur-md',
               title.length > 10 && 'text-[10px]',
