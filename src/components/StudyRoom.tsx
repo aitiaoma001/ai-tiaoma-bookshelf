@@ -84,7 +84,7 @@ export default function StudyRoom() {
         
         {/* 画作区域 */}
         {isVisible('painting') && (
-          <div className="painting-area" style={getPositionStyle('painting')}>
+          <div className="painting-area">
             <div className="painting-frame">
               <div className="frame-outer-edge"></div>
               <div className="frame-inner-edge"></div>
@@ -203,7 +203,7 @@ export default function StudyRoom() {
 
       {/* 沙发 */}
       {isVisible('sofa') && (
-        <div className="sofa" style={getPositionStyle('sofa')}>
+        <div className="sofa">
           <div className="sofa-back">
             <div className="tuft tuft-1"></div>
             <div className="tuft tuft-2"></div>
@@ -223,7 +223,7 @@ export default function StudyRoom() {
 
       {/* 大桌子 */}
       {isVisible('table') && (
-        <div className="table" style={getPositionStyle('table')}>
+        <div className="table">
           <div className="table-top">
             <div className="table-veneer"></div>
           </div>
@@ -237,7 +237,7 @@ export default function StudyRoom() {
 
       {/* 台灯 */}
       {isVisible('lamp') && (
-        <div className="lamp" onClick={() => setLampOn(!lampOn)} style={getPositionStyle('lamp')}>
+        <div className="lamp" onClick={() => setLampOn(!lampOn)}>
           <div className="lamp-cord"></div>
           <div className="lamp-shade">
             <div className="shade-rim shade-rim-top"></div>
@@ -259,7 +259,7 @@ export default function StudyRoom() {
 
       {/* 小桌子 */}
       {isVisible('sideTable') && (
-        <div className="side-table" style={getPositionStyle('sideTable')}>
+        <div className="side-table">
           <div className="side-table-top"></div>
           <div className="side-table-rail"></div>
           <div className="side-table-leg side-table-leg-1"></div>
@@ -290,7 +290,7 @@ export default function StudyRoom() {
 
       {/* 书架 */}
       {isVisible('bookshelf') && (
-        <div className="bookshelf" style={getPositionStyle('bookshelf')}>
+        <div className="bookshelf">
           <div className="shelf-back"></div>
           {[1, 2, 3].map((row) => (
             <div key={row} className={`shelf shelf-${row}`}>
@@ -322,7 +322,7 @@ export default function StudyRoom() {
 
       {/* 地上的书 */}
       {isVisible('floorBooks') && (
-        <div className="floor-books" style={getPositionStyle('floorBooks')}>
+        <div className="floor-books">
           <div className="book-stack">
             {getBooksByLocation('floor').map((book, i) => (
               <div
@@ -368,7 +368,7 @@ export default function StudyRoom() {
 
       {/* 猫 */}
       {isVisible('cat') && (
-        <div className="cat" style={getPositionStyle('cat')}>
+        <div className="cat">
           <div className="cat-tail"></div>
           <div className="cat-body">
             <div className="cat-fur-pattern"></div>
