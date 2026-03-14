@@ -95,6 +95,18 @@ export const defaultApps: AppData[] = [
     category: '效率工具',
     tags: ['翻译', '语言', '工具'],
     createdAt: Date.now()
+  },
+  {
+    id: 'app-7',
+    name: '财富管家',
+    icon: '📈',
+    shortDesc: '专业投资理财，资产智能配置',
+    fullDesc: '财富管家是一款专业的投资理财工具，提供股票、基金、债券等多品种行情分析。智能资产配置建议，风险评估预警，助您实现财富稳健增长。',
+    downloadUrl: 'https://example.com/download/caifu',
+    qrcodeUrl: '',
+    category: '金融投资',
+    tags: ['投资', '理财', '股票'],
+    createdAt: Date.now()
   }
 ];
 
@@ -122,6 +134,7 @@ export const defaultComments: Comment[] = [
 export const categories = [
   '全部',
   '效率工具',
+  '金融投资',
   '游戏娱乐',
   '健康生活',
   '生活服务',
