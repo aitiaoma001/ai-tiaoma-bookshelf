@@ -56,10 +56,6 @@ export default function AppDetailClient() {
             <span>←</span>
             <span>返回列表</span>
           </Link>
-          <Link href="/admin" className="btn-admin">
-            <span>⚙</span>
-            <span>管理</span>
-          </Link>
         </div>
       </header>
 
@@ -172,6 +168,12 @@ export default function AppDetailClient() {
           </div>
         </div>
       </main>
+
+      {/* 底部 */}
+      <footer className="footer">
+        <span>© 2024 AI 跳马</span>
+        <Link href="/admin" className="footer-admin">管理</Link>
+      </footer>
     </div>
   );
 }

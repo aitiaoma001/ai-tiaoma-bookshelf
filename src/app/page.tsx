@@ -30,12 +30,6 @@ export default function HomePage() {
             <span className="logo-icon">◇</span>
             <span className="logo-text">APP SHOWCASE</span>
           </Link>
-          <div className="header-actions">
-            <Link href="/admin" className="btn-admin">
-              <span>⚙</span>
-              <span>管理</span>
-            </Link>
-          </div>
         </div>
       </header>
 
@@ -82,6 +76,7 @@ export default function HomePage() {
       {/* 底部 */}
       <footer className="footer">
         <span>© 2024 AI 跳马 · 精选应用展示</span>
+        <Link href="/admin" className="footer-admin">管理</Link>
       </footer>
     </div>
   );
