@@ -83,11 +83,11 @@ export default function AppDetailClient() {
               <p className="full-desc">{app.fullDesc}</p>
             </section>
 
-            {/* 用户评论 */}
+            {/* 用户留言 */}
             <section className="detail-section">
-              <h2>用户评论 ({comments.length})</h2>
+              <h2>用户留言 ({comments.length})</h2>
               
-              {/* 发表评论 */}
+              {/* 发表留言 */}
               <form className="comment-form" onSubmit={handleSubmitComment}>
                 <div className="form-row">
                   <input
@@ -113,7 +113,7 @@ export default function AppDetailClient() {
                 <div className="form-row">
                   <input
                     type="text"
-                    placeholder="发表评论..."
+                    placeholder="发表留言..."
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     className="input-comment"
@@ -122,7 +122,7 @@ export default function AppDetailClient() {
                 </div>
               </form>
 
-              {/* 评论列表 */}
+              {/* 留言列表 */}
               <div className="comment-list">
                 {comments.map(comment => (
                   <div key={comment.id} className="comment-item">
@@ -136,23 +136,23 @@ export default function AppDetailClient() {
                   </div>
                 ))}
                 {comments.length === 0 && (
-                  <div className="no-comments">暂无评论，来抢沙发吧！</div>
+                  <div className="no-comments">暂无留言，来抢沙发吧！</div>
                 )}
               </div>
             </section>
           </div>
 
-          {/* 右侧：下载 */}
+          {/* 右侧：访问 */}
           <div className="detail-right">
             <div className="download-card">
-              <h3>立即下载</h3>
+              <h3>访问网站</h3>
               <div className="qrcode-area">
                 {app.qrcodeUrl ? (
-                  <img src={app.qrcodeUrl} alt="下载二维码" className="qrcode-img" />
+                  <img src={app.qrcodeUrl} alt="访问二维码" className="qrcode-img" />
                 ) : (
                   <div className="qrcode-placeholder">
                     <span>▢</span>
-                    <span>扫码下载</span>
+                    <span>扫码访问</span>
                   </div>
                 )}
               </div>
@@ -162,7 +162,7 @@ export default function AppDetailClient() {
                 rel="noopener noreferrer"
                 className="btn-download"
               >
-                前往下载
+                立即访问
               </a>
             </div>
           </div>

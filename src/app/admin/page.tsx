@@ -86,9 +86,9 @@ export default function AdminPage() {
     setShowForm(false);
   };
 
-  // 删除APP
+  // 删除网站
   const handleDelete = (id: string) => {
-    if (confirm('确定删除此应用？')) {
+    if (confirm('确定删除此网站？')) {
       deleteApp(id);
     }
   };
@@ -158,21 +158,21 @@ export default function AdminPage() {
             className={`admin-tab ${activeTab === 'apps' ? 'active' : ''}`}
             onClick={() => setActiveTab('apps')}
           >
-            应用管理 ({apps.length})
+            网站管理 ({apps.length})
           </button>
           <button 
             className={`admin-tab ${activeTab === 'comments' ? 'active' : ''}`}
             onClick={() => setActiveTab('comments')}
           >
-            评论管理 ({comments.length})
+            留言管理 ({comments.length})
           </button>
         </div>
 
-        {/* APP管理 */}
+        {/* 网站管理 */}
         {activeTab === 'apps' && (
           <div className="admin-content">
             <div className="admin-actions">
-              <button onClick={handleAddNew} className="btn-add">+ 添加应用</button>
+              <button onClick={handleAddNew} className="btn-add">+ 添加网站</button>
             </div>
             
             <div className="admin-list">
@@ -193,7 +193,7 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* 评论管理 */}
+        {/* 留言管理 */}
         {activeTab === 'comments' && (
           <div className="admin-content">
             <div className="admin-list">
@@ -209,7 +209,7 @@ export default function AdminPage() {
                         </span>
                       </div>
                       <div className="item-desc">{comment.content}</div>
-                      <div className="comment-app-name">应用: {app?.name || '未知'}</div>
+                      <div className="comment-app-name">网站: {app?.name || '未知'}</div>
                     </div>
                     <div className="item-actions">
                       <button onClick={() => deleteComment(comment.id)} className="btn-delete">删除</button>
@@ -217,7 +217,7 @@ export default function AdminPage() {
                   </div>
                 );
               })}
-              {comments.length === 0 && <div className="empty-tip">暂无评论</div>}
+              {comments.length === 0 && <div className="empty-tip">暂无留言</div>}
             </div>
           </div>
         )}
@@ -228,7 +228,7 @@ export default function AdminPage() {
         <div className="modal-overlay" onClick={() => setShowForm(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>{editingApp ? '编辑应用' : '添加应用'}</h2>
+              <h2>{editingApp ? '编辑网站' : '添加网站'}</h2>
               <button onClick={() => setShowForm(false)} className="modal-close">×</button>
             </div>
             <div className="modal-body">
@@ -254,7 +254,7 @@ export default function AdminPage() {
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     className="form-input"
-                    placeholder="应用名称"
+                    placeholder="网站名称"
                   />
                 </div>
                 <div className="form-group">
@@ -286,7 +286,7 @@ export default function AdminPage() {
                   value={formData.fullDesc}
                   onChange={e => setFormData({ ...formData, fullDesc: e.target.value })}
                   className="form-textarea"
-                  placeholder="详细介绍应用功能..."
+                  placeholder="详细介绍网站功能..."
                   rows={4}
                 />
               </div>
@@ -297,12 +297,12 @@ export default function AdminPage() {
                   value={formData.tags}
                   onChange={e => setFormData({ ...formData, tags: e.target.value })}
                   className="form-input"
-                  placeholder="AI, 工具, 效率"
+                  placeholder="PWA, 工具, 效率"
                 />
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label>下载链接</label>
+                  <label>访问链接</label>
                   <input
                     type="text"
                     value={formData.downloadUrl}

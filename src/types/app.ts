@@ -1,11 +1,11 @@
-// APP数据类型
+// PWA网站数据类型
 export interface AppData {
   id: string;
   name: string;
   icon: string; // 图标URL或emoji
   shortDesc: string; // 简短介绍
   fullDesc: string; // 详细介绍
-  downloadUrl: string; // 下载链接
+  downloadUrl: string; // 访问链接
   qrcodeUrl: string; // 二维码图片URL
   category: string; // 分类
   tags: string[];
@@ -22,90 +22,90 @@ export interface Comment {
   createdAt: number;
 }
 
-// 默认APP数据
+// 默认PWA网站数据
 export const defaultApps: AppData[] = [
   {
     id: 'app-1',
-    name: '智记账',
-    icon: '📊',
-    shortDesc: 'AI智能记账，自动识别消费类型',
-    fullDesc: '智记账是一款基于人工智能的个人财务管理应用。支持语音记账、拍照识别票据、自动分类统计等功能。通过AI算法分析您的消费习惯，提供个性化的理财建议。',
-    downloadUrl: 'https://example.com/download/zijizhang',
+    name: '任务清单',
+    icon: '✅',
+    shortDesc: '轻量级待办事项管理，支持离线使用',
+    fullDesc: '任务清单是一款渐进式Web应用(PWA)，帮助您高效管理日常待办事项。支持离线访问、桌面安装、消息推送等PWA特性。数据本地存储，保护隐私安全。',
+    downloadUrl: 'https://example.com/tasks',
     qrcodeUrl: '',
     category: '效率工具',
-    tags: ['财务', 'AI', '记账'],
+    tags: ['PWA', '待办', '离线'],
     createdAt: Date.now()
   },
   {
     id: 'app-2',
-    name: '悦动健身',
-    icon: '🏃',
-    shortDesc: '智能运动追踪，定制健身计划',
-    fullDesc: '悦动健身为您提供专业的运动追踪和健身指导。支持多种运动模式识别，智能生成个性化训练计划，实时监测心率、卡路里消耗等数据。',
-    downloadUrl: 'https://example.com/download/yuedong',
+    name: '天气通',
+    icon: '🌤️',
+    shortDesc: '实时天气预报，支持桌面推送通知',
+    fullDesc: '天气通是一款PWA天气应用，提供精准的实时天气预报。支持添加到主屏幕、离线缓存历史数据、恶劣天气推送预警。界面简洁，启动速度快。',
+    downloadUrl: 'https://example.com/weather',
     qrcodeUrl: '',
-    category: '健康生活',
-    tags: ['健身', '运动', '健康'],
+    category: '生活服务',
+    tags: ['PWA', '天气', '推送'],
     createdAt: Date.now()
   },
   {
     id: 'app-3',
-    name: '灵感笔记',
+    name: '笔记空间',
     icon: '📝',
-    shortDesc: '创意捕捉工具，支持手写语音',
-    fullDesc: '灵感笔记是一款多模态笔记应用，支持文字、手写、语音、图片等多种记录方式。内置AI助手可自动整理笔记内容，生成思维导图。',
-    downloadUrl: 'https://example.com/download/linggan',
+    shortDesc: '云端同步笔记，跨平台无缝衔接',
+    fullDesc: '笔记空间是一款支持离线编辑的PWA笔记应用。支持Markdown语法、实时云同步、跨设备访问。可安装到桌面，体验原生应用般的流畅操作。',
+    downloadUrl: 'https://example.com/notes',
     qrcodeUrl: '',
     category: '效率工具',
-    tags: ['笔记', '创意', 'AI'],
+    tags: ['PWA', '笔记', '同步'],
     createdAt: Date.now()
   },
   {
     id: 'app-4',
-    name: '星际探索',
-    icon: '🚀',
-    shortDesc: '沉浸式太空探索游戏',
-    fullDesc: '星际探索是一款科幻题材的太空探索游戏。在浩瀚的宇宙中探索未知星球，建造基地，发展科技，与其他玩家组成联盟共同征服银河。',
-    downloadUrl: 'https://example.com/download/xingji',
+    name: '番茄时钟',
+    icon: '🍅',
+    shortDesc: '专注时间管理，提升工作效率',
+    fullDesc: '番茄时钟是一款基于番茄工作法的PWA应用。支持后台运行、桌面通知提醒、统计报表。可离线使用，无需担心网络中断影响专注。',
+    downloadUrl: 'https://example.com/pomodoro',
     qrcodeUrl: '',
-    category: '游戏娱乐',
-    tags: ['游戏', '科幻', '策略'],
+    category: '效率工具',
+    tags: ['PWA', '时间', '专注'],
     createdAt: Date.now()
   },
   {
     id: 'app-5',
-    name: '时光相册',
-    icon: '📷',
-    shortDesc: 'AI智能整理，自动生成回忆',
-    fullDesc: '时光相册利用AI技术自动整理您的照片，识别人物、场景、时间，智能生成精彩回忆相册。支持云端同步，永不丢失珍贵回忆。',
-    downloadUrl: 'https://example.com/download/shiguang',
+    name: '图片压缩',
+    icon: '🖼️',
+    shortDesc: '本地图片压缩，隐私安全有保障',
+    fullDesc: '图片压缩是一款完全离线运行的PWA工具。所有处理在本地完成，无需上传服务器，保护您的隐私。支持批量压缩、格式转换，效果媲美桌面软件。',
+    downloadUrl: 'https://example.com/compress',
     qrcodeUrl: '',
-    category: '生活服务',
-    tags: ['相册', 'AI', '云存储'],
+    category: '效率工具',
+    tags: ['PWA', '图片', '离线'],
     createdAt: Date.now()
   },
   {
     id: 'app-6',
-    name: '极简翻译',
-    icon: '🌐',
-    shortDesc: '支持100+语言即时翻译',
-    fullDesc: '极简翻译是一款轻量级翻译工具，支持100多种语言的即时翻译。提供文本翻译、语音翻译、拍照翻译等多种模式，离线也可使用。',
-    downloadUrl: 'https://example.com/download/jijian',
+    name: '密码生成器',
+    icon: '🔐',
+    shortDesc: '安全密码生成，本地算法更可靠',
+    fullDesc: '密码生成器是一款轻量级PWA安全工具。支持自定义密码规则、批量生成、本地加密存储。无网络状态下也可正常使用，保障密码安全。',
+    downloadUrl: 'https://example.com/password',
     qrcodeUrl: '',
     category: '效率工具',
-    tags: ['翻译', '语言', '工具'],
+    tags: ['PWA', '安全', '密码'],
     createdAt: Date.now()
   },
   {
     id: 'app-7',
-    name: '财富管家',
+    name: '投资追踪',
     icon: '📈',
-    shortDesc: '专业投资理财，资产智能配置',
-    fullDesc: '财富管家是一款专业的投资理财工具，提供股票、基金、债券等多品种行情分析。智能资产配置建议，风险评估预警，助您实现财富稳健增长。',
-    downloadUrl: 'https://example.com/download/caifu',
+    shortDesc: '投资组合管理，实时行情推送',
+    fullDesc: '投资追踪是一款专业的PWA金融工具。支持股票、基金行情追踪，价格预警推送，投资组合分析。可安装到桌面，随时查看市场动态。',
+    downloadUrl: 'https://example.com/invest',
     qrcodeUrl: '',
     category: '金融投资',
-    tags: ['投资', '理财', '股票'],
+    tags: ['PWA', '投资', '行情'],
     createdAt: Date.now()
   }
 ];
@@ -115,16 +115,16 @@ export const defaultComments: Comment[] = [
   {
     id: 'c1',
     appId: 'app-1',
-    author: '用户A',
-    content: '非常好用，自动分类功能很智能！',
+    author: '小明',
+    content: '非常好用，离线也能访问！',
     rating: 5,
     createdAt: Date.now() - 86400000
   },
   {
     id: 'c2',
     appId: 'app-1',
-    author: '用户B',
-    content: '界面简洁，功能实用',
+    author: '测试用户',
+    content: '添加到桌面后体验很流畅',
     rating: 4,
     createdAt: Date.now() - 172800000
   }
@@ -135,8 +135,6 @@ export const categories = [
   '全部',
   '效率工具',
   '金融投资',
-  '游戏娱乐',
-  '健康生活',
   '生活服务',
   '社交通讯',
   '学习教育',

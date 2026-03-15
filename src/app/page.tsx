@@ -28,7 +28,7 @@ export default function HomePage() {
         <div className="header-inner">
           <Link href="/" className="logo">
             <span className="logo-icon">◇</span>
-            <span className="logo-text">APP SHOWCASE</span>
+            <span className="logo-text">PWA NAV</span>
           </Link>
         </div>
       </header>
@@ -41,7 +41,7 @@ export default function HomePage() {
             <span className="search-icon">⌕</span>
             <input
               type="text"
-              placeholder="搜索应用..."
+              placeholder="搜索PWA网站..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
@@ -75,7 +75,7 @@ export default function HomePage() {
 
       {/* 底部 */}
       <footer className="footer">
-        <span>© 2024 AI 跳马 · 精选应用展示</span>
+        <span>© 2024 AI 跳马 · PWA网站导航</span>
         <Link href="/admin" className="footer-admin">管理</Link>
       </footer>
     </div>
