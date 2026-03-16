@@ -1109,3 +1109,240 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==================== 日记本 ==================== */
+.diary-page .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-diary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: var(--radius);
+  color: #c4b5fd;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.btn-diary:hover {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(0, 212, 255, 0.3) 100%);
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+.diary-main {
+  max-width: 900px;
+}
+
+.diary-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.diary-count {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.diary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.diary-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.diary-item:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+}
+
+.diary-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.diary-mood, .diary-weather {
+  font-size: 18px;
+}
+
+.diary-item-date {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.diary-item-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.diary-item-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.diary-item-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 8px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--accent-primary);
+}
+
+/* 日记详情 */
+.diary-view {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.diary-view-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.diary-view-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.diary-date {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.diary-view-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.diary-view-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.diary-view-content {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.diary-view-content p {
+  margin-bottom: 12px;
+}
+
+/* 空状态 */
+.empty-diary {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-diary p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Emoji选择器 */
+.emoji-picker {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.emoji-option {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.emoji-option:hover {
+  border-color: var(--text-secondary);
+}
+
+.emoji-option.active {
+  border-color: var(--accent-primary);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* 大号文本框 */
+.form-textarea-large {
+  min-height: 240px;
+  resize: vertical;
+}
+
+/* 大号弹窗 */
+.modal-large {
+  max-width: 640px;
+}
+
+@media (max-width: 768px) {
+  .diary-view {
+    padding: 16px;
+  }
+  
+  .diary-view-title {
+    font-size: 18px;
+  }
+  
+  .diary-view-content {
+    font-size: 14px;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+}

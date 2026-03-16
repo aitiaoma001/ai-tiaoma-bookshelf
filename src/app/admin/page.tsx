@@ -146,7 +146,10 @@ export default function AdminPage() {
             </Link>
             <h1 className="page-title">后台管理</h1>
           </div>
-          <button onClick={logout} className="btn-logout">退出登录</button>
+          <div className="header-actions">
+            <Link href="/diary" className="btn-diary">📖 日记本</Link>
+            <button onClick={logout} className="btn-logout">退出登录</button>
+          </div>
         </div>
       </header>
 

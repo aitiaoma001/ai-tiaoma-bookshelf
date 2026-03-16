@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inspector } from 'react-dev-inspector';
 import { AppProvider } from '@/store/AppContext';
+import { DiaryProvider } from '@/store/DiaryContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -35,8 +36,10 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body className={`antialiased`}>
         <AppProvider>
-          {isDev && <Inspector />}
-          {children}
+          <DiaryProvider>
+            {isDev && <Inspector />}
+            {children}
+          </DiaryProvider>
         </AppProvider>
       </body>
     </html>
