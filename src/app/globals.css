@@ -1346,3 +1346,185 @@ body {
     gap: 8px;
   }
 }
+
+/* ==================== 日记本布局 ==================== */
+.diary-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 20px;
+  align-items: start;
+}
+
+.diary-content {
+  min-width: 0;
+}
+
+.diary-sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+/* 常用链接卡片 */
+.quick-links-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.quick-links-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.quick-links-header h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.btn-add-link {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add-link:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.quick-links-list {
+  padding: 8px;
+}
+
+.quick-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+
+.quick-link-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.quick-link-a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.link-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.link-title {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.quick-link-item:hover .link-actions {
+  opacity: 1;
+}
+
+.link-btn-edit, .link-btn-delete {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.link-btn-edit {
+  color: var(--text-muted);
+}
+
+.link-btn-edit:hover {
+  color: var(--accent-primary);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.link-btn-delete {
+  color: var(--text-muted);
+}
+
+.link-btn-delete:hover {
+  color: #ff6464;
+  background: rgba(255, 100, 100, 0.1);
+}
+
+.no-links {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* 首页底部链接 */
+.footer-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.footer-diary {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer-diary:hover {
+  color: var(--accent-primary);
+}
+
+@media (max-width: 900px) {
+  .diary-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .diary-sidebar {
+    position: static;
+    order: -1;
+  }
+  
+  .quick-links-card {
+    margin-bottom: 20px;
+  }
+}

@@ -7,15 +7,27 @@ import { useApps } from '@/store/AppContext';
 
 export default function AppDetailClient() {
   const params = useParams();
-  const appId = params.id as string;
+  const appId = Array.isArray(params.id) ? params.id[0] : params.id;
   const { apps, getAppComments, addComment } = useApps();
   
   const app = apps.find(a => a.id === appId);
-  const comments = getAppComments(appId);
+  const comments = getAppComments(appId || '');
   
   const [newComment, setNewComment] = useState('');
   const [newAuthor, setNewAuthor] = useState('');
   const [newRating, setNewRating] = useState(5);
+
+  if (!appId) {
+    return (
+      <div className="app-container">
+        <div className="not-found">
+          <span className="nf-icon">∅</span>
+          <h2>请选择一个应用</h2>
+          <Link href="/" className="btn-back">返回首页</Link>
+        </div>
+      </div>
+    );
+  }
 
   if (!app) {
     return (

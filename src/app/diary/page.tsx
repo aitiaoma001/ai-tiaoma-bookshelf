@@ -1,14 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useDiary } from '@/store/DiaryContext';
 import { useAuth } from '@/store/AppContext';
 import { Diary, moodOptions, weatherOptions } from '@/types/diary';
+import { QuickLink, iconOptions } from '@/types/links';
 
 export default function DiaryPage() {
   const { isAuthenticated, isLoading, login, logout } = useAuth();
   const { diaries, addDiary, updateDiary, deleteDiary } = useDiary();
+  
+  // 常用链接状态
+  const [quickLinks, setQuickLinks] = useState<QuickLink[]>([]);
+  const [showLinkForm, setShowLinkForm] = useState(false);
+  const [editingLink, setEditingLink] = useState<QuickLink | null>(null);
+  const [linkFormData, setLinkFormData] = useState({ title: '', url: '', icon: '🔗' });
   
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,6 +30,58 @@ export default function DiaryPage() {
     weather: '☀️',
     tags: ''
   });
+
+  // 加载常用链接
+  useEffect(() => {
+    const savedLinks = localStorage.getItem('quick-links');
+    if (savedLinks) {
+      setQuickLinks(JSON.parse(savedLinks));
+    }
+  }, []);
+
+  // 保存常用链接
+  useEffect(() => {
+    if (quickLinks.length > 0 || localStorage.getItem('quick-links')) {
+      localStorage.setItem('quick-links', JSON.stringify(quickLinks));
+    }
+  }, [quickLinks]);
+
+  // 添加/编辑链接
+  const handleSaveLink = () => {
+    if (!linkFormData.title.trim() || !linkFormData.url.trim()) return;
+    
+    if (editingLink) {
+      setQuickLinks(prev => prev.map(l => 
+        l.id === editingLink.id 
+          ? { ...l, ...linkFormData }
+          : l
+      ));
+    } else {
+      const newLink: QuickLink = {
+        id: `link-${Date.now()}`,
+        ...linkFormData,
+        createdAt: Date.now()
+      };
+      setQuickLinks(prev => [...prev, newLink]);
+    }
+    setShowLinkForm(false);
+    setEditingLink(null);
+    setLinkFormData({ title: '', url: '', icon: '🔗' });
+  };
+
+  // 删除链接
+  const handleDeleteLink = (id: string) => {
+    if (confirm('确定删除此链接？')) {
+      setQuickLinks(prev => prev.filter(l => l.id !== id));
+    }
+  };
+
+  // 打开编辑链接
+  const handleEditLink = (link: QuickLink) => {
+    setEditingLink(link);
+    setLinkFormData({ title: link.title, url: link.url, icon: link.icon });
+    setShowLinkForm(true);
+  };
 
   // 登录处理
   const handleLogin = (e: React.FormEvent) => {
@@ -148,31 +207,62 @@ export default function DiaryPage() {
         </header>
 
         <main className="main diary-main">
-          <div className="diary-view">
-            <div className="diary-view-header">
-              <div className="diary-view-meta">
-                <span className="diary-mood">{viewDiary.mood}</span>
-                <span className="diary-weather">{viewDiary.weather}</span>
-                <span className="diary-date">{formatDate(viewDiary.createdAt)}</span>
-              </div>
-              <h1 className="diary-view-title">{viewDiary.title}</h1>
-              {viewDiary.tags.length > 0 && (
-                <div className="diary-view-tags">
-                  {viewDiary.tags.map(tag => (
-                    <span key={tag} className="tag">{tag}</span>
+          <div className="diary-layout">
+            <div className="diary-content">
+              <div className="diary-view">
+                <div className="diary-view-header">
+                  <div className="diary-view-meta">
+                    <span className="diary-mood">{viewDiary.mood}</span>
+                    <span className="diary-weather">{viewDiary.weather}</span>
+                    <span className="diary-date">{formatDate(viewDiary.createdAt)}</span>
+                  </div>
+                  <h1 className="diary-view-title">{viewDiary.title}</h1>
+                  {viewDiary.tags.length > 0 && (
+                    <div className="diary-view-tags">
+                      {viewDiary.tags.map(tag => (
+                        <span key={tag} className="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="diary-view-content">
+                  {viewDiary.content.split('\n').map((line, i) => (
+                    <p key={i}>{line || '\u00A0'}</p>
                   ))}
                 </div>
-              )}
+              </div>
             </div>
-            <div className="diary-view-content">
-              {viewDiary.content.split('\n').map((line, i) => (
-                <p key={i}>{line || '\u00A0'}</p>
-              ))}
-            </div>
+            
+            {/* 右侧常用链接 */}
+            <aside className="diary-sidebar">
+              <div className="quick-links-card">
+                <div className="quick-links-header">
+                  <h3>常用链接</h3>
+                  <button onClick={() => { setEditingLink(null); setLinkFormData({ title: '', url: '', icon: '🔗' }); setShowLinkForm(true); }} className="btn-add-link">+</button>
+                </div>
+                <div className="quick-links-list">
+                  {quickLinks.map(link => (
+                    <div key={link.id} className="quick-link-item">
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="quick-link-a">
+                        <span className="link-icon">{link.icon}</span>
+                        <span className="link-title">{link.title}</span>
+                      </a>
+                      <div className="link-actions">
+                        <button onClick={() => handleEditLink(link)} className="link-btn-edit">✎</button>
+                        <button onClick={() => handleDeleteLink(link.id)} className="link-btn-delete">×</button>
+                      </div>
+                    </div>
+                  ))}
+                  {quickLinks.length === 0 && (
+                    <div className="no-links">暂无链接</div>
+                  )}
+                </div>
+              </div>
+            </aside>
           </div>
         </main>
 
-        {/* 编辑弹窗 */}
+        {/* 日记编辑弹窗 */}
         {showForm && (
           <div className="modal-overlay" onClick={() => setShowForm(false)}>
             <div className="modal modal-large" onClick={e => e.stopPropagation()}>
@@ -249,6 +339,58 @@ export default function DiaryPage() {
             </div>
           </div>
         )}
+
+        {/* 链接编辑弹窗 */}
+        {showLinkForm && (
+          <div className="modal-overlay" onClick={() => setShowLinkForm(false)}>
+            <div className="modal" onClick={e => e.stopPropagation()}>
+              <div className="modal-header">
+                <h2>{editingLink ? '编辑链接' : '添加链接'}</h2>
+                <button onClick={() => setShowLinkForm(false)} className="modal-close">×</button>
+              </div>
+              <div className="modal-body">
+                <div className="form-group">
+                  <label>图标</label>
+                  <div className="emoji-picker">
+                    {iconOptions.map(icon => (
+                      <button
+                        key={icon}
+                        className={`emoji-option ${linkFormData.icon === icon ? 'active' : ''}`}
+                        onClick={() => setLinkFormData({ ...linkFormData, icon })}
+                      >
+                        {icon}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>标题</label>
+                  <input
+                    type="text"
+                    value={linkFormData.title}
+                    onChange={e => setLinkFormData({ ...linkFormData, title: e.target.value })}
+                    className="form-input"
+                    placeholder="链接名称"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>网址</label>
+                  <input
+                    type="url"
+                    value={linkFormData.url}
+                    onChange={e => setLinkFormData({ ...linkFormData, url: e.target.value })}
+                    className="form-input"
+                    placeholder="https://..."
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button onClick={() => setShowLinkForm(false)} className="btn-cancel">取消</button>
+                <button onClick={handleSaveLink} className="btn-save">保存</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -272,47 +414,78 @@ export default function DiaryPage() {
       </header>
 
       <main className="main diary-main">
-        <div className="diary-actions">
-          <button onClick={handleAddNew} className="btn-add">+ 写日记</button>
-          <span className="diary-count">共 {diaries.length} 篇</span>
-        </div>
+        <div className="diary-layout">
+          <div className="diary-content">
+            <div className="diary-actions">
+              <button onClick={handleAddNew} className="btn-add">+ 写日记</button>
+              <span className="diary-count">共 {diaries.length} 篇</span>
+            </div>
 
-        <div className="diary-list">
-          {diaries.map(diary => (
-            <div 
-              key={diary.id} 
-              className="diary-item"
-              onClick={() => setViewDiary(diary)}
-            >
-              <div className="diary-item-header">
-                <span className="diary-mood">{diary.mood}</span>
-                <span className="diary-weather">{diary.weather}</span>
-                <span className="diary-item-date">{formatDate(diary.createdAt)}</span>
-              </div>
-              <h3 className="diary-item-title">{diary.title}</h3>
-              <p className="diary-item-content">
-                {diary.content.substring(0, 100)}...
-              </p>
-              {diary.tags.length > 0 && (
-                <div className="diary-item-tags">
-                  {diary.tags.slice(0, 3).map(tag => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
+            <div className="diary-list">
+              {diaries.map(diary => (
+                <div 
+                  key={diary.id} 
+                  className="diary-item"
+                  onClick={() => setViewDiary(diary)}
+                >
+                  <div className="diary-item-header">
+                    <span className="diary-mood">{diary.mood}</span>
+                    <span className="diary-weather">{diary.weather}</span>
+                    <span className="diary-item-date">{formatDate(diary.createdAt)}</span>
+                  </div>
+                  <h3 className="diary-item-title">{diary.title}</h3>
+                  <p className="diary-item-content">
+                    {diary.content.substring(0, 100)}...
+                  </p>
+                  {diary.tags.length > 0 && (
+                    <div className="diary-item-tags">
+                      {diary.tags.slice(0, 3).map(tag => (
+                        <span key={tag} className="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+              {diaries.length === 0 && (
+                <div className="empty-diary">
+                  <span className="empty-icon">📝</span>
+                  <p>还没有日记</p>
+                  <button onClick={handleAddNew} className="btn-add">写第一篇</button>
                 </div>
               )}
             </div>
-          ))}
-          {diaries.length === 0 && (
-            <div className="empty-diary">
-              <span className="empty-icon">📝</span>
-              <p>还没有日记</p>
-              <button onClick={handleAddNew} className="btn-add">写第一篇</button>
+          </div>
+          
+          {/* 右侧常用链接 */}
+          <aside className="diary-sidebar">
+            <div className="quick-links-card">
+              <div className="quick-links-header">
+                <h3>常用链接</h3>
+                <button onClick={() => { setEditingLink(null); setLinkFormData({ title: '', url: '', icon: '🔗' }); setShowLinkForm(true); }} className="btn-add-link">+</button>
+              </div>
+              <div className="quick-links-list">
+                {quickLinks.map(link => (
+                  <div key={link.id} className="quick-link-item">
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="quick-link-a">
+                      <span className="link-icon">{link.icon}</span>
+                      <span className="link-title">{link.title}</span>
+                    </a>
+                    <div className="link-actions">
+                      <button onClick={() => handleEditLink(link)} className="link-btn-edit">✎</button>
+                      <button onClick={() => handleDeleteLink(link.id)} className="link-btn-delete">×</button>
+                    </div>
+                  </div>
+                ))}
+                {quickLinks.length === 0 && (
+                  <div className="no-links">暂无链接，点击 + 添加</div>
+                )}
+              </div>
             </div>
-          )}
+          </aside>
         </div>
       </main>
 
-      {/* 编辑弹窗 */}
+      {/* 日记编辑弹窗 */}
       {showForm && (
         <div className="modal-overlay" onClick={() => setShowForm(false)}>
           <div className="modal modal-large" onClick={e => e.stopPropagation()}>
@@ -385,6 +558,58 @@ export default function DiaryPage() {
             <div className="modal-footer">
               <button onClick={() => setShowForm(false)} className="btn-cancel">取消</button>
               <button onClick={handleSave} className="btn-save">保存</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 链接编辑弹窗 */}
+      {showLinkForm && (
+        <div className="modal-overlay" onClick={() => setShowLinkForm(false)}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{editingLink ? '编辑链接' : '添加链接'}</h2>
+              <button onClick={() => setShowLinkForm(false)} className="modal-close">×</button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label>图标</label>
+                <div className="emoji-picker">
+                  {iconOptions.map(icon => (
+                    <button
+                      key={icon}
+                      className={`emoji-option ${linkFormData.icon === icon ? 'active' : ''}`}
+                      onClick={() => setLinkFormData({ ...linkFormData, icon })}
+                    >
+                      {icon}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="form-group">
+                <label>标题</label>
+                <input
+                  type="text"
+                  value={linkFormData.title}
+                  onChange={e => setLinkFormData({ ...linkFormData, title: e.target.value })}
+                  className="form-input"
+                  placeholder="链接名称"
+                />
+              </div>
+              <div className="form-group">
+                <label>网址</label>
+                <input
+                  type="url"
+                  value={linkFormData.url}
+                  onChange={e => setLinkFormData({ ...linkFormData, url: e.target.value })}
+                  className="form-input"
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button onClick={() => setShowLinkForm(false)} className="btn-cancel">取消</button>
+              <button onClick={handleSaveLink} className="btn-save">保存</button>
             </div>
           </div>
         </div>

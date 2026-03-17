@@ -76,7 +76,10 @@ export default function HomePage() {
       {/* 底部 */}
       <footer className="footer">
         <span>© 2024 AI 跳马 · PWA网站导航</span>
-        <Link href="/admin" className="footer-admin">管理</Link>
+        <div className="footer-links">
+          <Link href="/diary" className="footer-diary">📖 日记</Link>
+          <Link href="/admin" className="footer-admin">管理</Link>
+        </div>
       </footer>
     </div>
   );
